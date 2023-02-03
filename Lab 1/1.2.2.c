@@ -27,7 +27,7 @@ void init(){
 
     P3OUT &= 0xDE; //
     P3OUT |= 0x80; //
-    P5OUT &= 0xEF; //Display Off
+    P5OUT &= 0xEF; // Display Off
     P4OUT &= 0x18; //
     P4OUT |= 0x08; //
 
