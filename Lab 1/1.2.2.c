@@ -6,17 +6,18 @@
  */
 void init(){
     for(i=0; i < 1250000; i++);
-    P3OUT |= 0x40;
-    P3OUT &= 0xDE;
-    P4OUT |= 0x60;
-    P4OUT &= 0x7F;
-    P5OUT &= 0xEF;
+    P3OUT |= 0x40; //
+    P3OUT &= 0xDE; //
+    P4OUT |= 0x60; // Function Set
+    P4OUT &= 0x7F; //
+    P5OUT &= 0xEF; //
     for(i=0; i < 125000; i++);
-    P3OUT |= 0x40;
-    P3OUT &= 0xDE;
-    P4OUT |= 0x60;
-    P4OUT &= 0x7F;
-    P5OUT &= 0xEF;
+    P3OUT |= 0x40; //
+    P3OUT &= 0xDE; //
+    P4OUT |= 0x60; // Function Set
+    P4OUT &= 0x7F; //
+	
+    P5OUT &= 0xEF; //
     for(i=0; i < 3750; i++);
     P3OUT &= 0xDE; //
     P3OUT |= 0x80; //
