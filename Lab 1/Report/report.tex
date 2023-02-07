@@ -1,26 +1,53 @@
-\documentclass[journal]{IEEEtran}
-\hyphenation{op-tical net-works semi-conduc-tor}
+\documentclass[journal]{IEEEtran} \hyphenation{op-tical net-works
+  semi-conduc-tor} \usepackage{textgreek} \usepackage{graphicx}
+\usepackage{listings} \usepackage{hyperref}
 \begin{document}
-\title{Experiment 2 Complementary Tasks\\ Lab Report}
-\author{Fabio J. Matos Nieves, Enrique Chompre Gonzalez}
+\title{Experiment 2 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
+  Nieves, Enrique Chompre Gonzalez}
 \maketitle
 \begin{abstract}
-The abstract goes here.
+  The purpose of this document is to detail our implementation of the
+  complementary tasks from the second experiment of the ICOM 4217 Laboratory.
 \end{abstract}
 \begin{IEEEkeywords}
-MCU, LDC, Display
+  MCU, LDC, Display, Pins,
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \section{Introduction}
-\IEEEPARstart{T}{his}
-
+\IEEEPARstart{T}{he} complementary tasks for this laboratory assignment consist
+of using push buttons to make an LCD panel scroll through a list of 16 messages
+either up or down through the list. To accomplish this task we first had to
+initialize the LCD, and make several functions such as clearing the display,
+moving the cursor to various positions, printing out a character and printing
+out a message\cite{rojasEmbeddedSystemsDesign2016}.
 \section{Materials and Methods}
-
+List of Materials
+\begin{itemize}
+  \item 1 Development Board
+  \item 1 IDE Application
+  \item 1 LCD Display: 2 lines 16 characters W/HD 44780
+        Controller\cite{LCDControllerDatasheets}
+  \item 2 Light Emitting Diodes
+  \item 2 330\textOmega \space1/4 W Carbon Fill Resistor
+  \item 2 4.7K\textOmega \space1/4 W Carbon Fill Resistor
+  \item 2 Momentary Switch
+\end{itemize}
+The software plan for the complementary task is as follows:
+\begin{enumerate}
+  \item Initialize the LCD
+  \item Allocate memory for the array of strings.
+  \item Display the first two strings of the array.
+  \item Poll both push buttons in an infinite loop.
+  \item Display new elements of the list of strings depending on which
+        pushbutton is being pressed.
+\end{enumerate}
+\vspace{7cm} Wiring Diagram:
+\begin{figure}[ht]
+  \centering \includegraphics[width=0.4\textwidth]{./Figures/wiring-diagram.jpg}
+  \caption{Wiring Diagram for LCD display and MCU}
+\end{figure}
 \section{Results}
-\appendices
-\begin{thebibliography}{1}
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-\end{thebibliography}
+The source code is located on GitHub
+\href{https://github.com/fabiomatos999/ICOM-4217-Lab/blob/main/Lab\%201/1.2.2.c}{here}.
+\bibliographystyle{IEEEtran} \bibliography{../../My Library}
 \end{document}
