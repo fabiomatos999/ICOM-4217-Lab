@@ -132,7 +132,7 @@ void main(void)
 
     volatile unsigned int i=0;      // volatile to prevent optimization
 
-
+    button_increment(messages,&i);
     while (1) {
            if(!(P5IN & 0x10)){
                button_increment(messages,&i);
