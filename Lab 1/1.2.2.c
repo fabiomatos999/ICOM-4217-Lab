@@ -4,34 +4,37 @@
 
 void init(){
     volatile unsigned int j;
-    __delay_cycles(45000);
+    __delay_cycles(450000);
     P3OUT ^= 0x10;
     P4OUT = 0x60; //Function Set
     P3OUT ^= 0x10;
-    __delay_cycles(45000);
+    __delay_cycles(450000);
     P3OUT ^= 0x10;//Function Set
     P3OUT ^= 0x10;
     __delay_cycles(4500);
 
     P3OUT ^= 0x10;//Function Set
     P3OUT ^= 0x10;
+    __delay_cycles(4500);
 
     P3OUT ^= 0x10;
     P4OUT = 0x68; //Function Set with 2 lines
     P3OUT ^= 0x10;
+    __delay_cycles(4500);
 
+    __delay_cycles(4500);
     P3OUT ^= 0x10;
     P4OUT = 0x08; //Display Off
     P3OUT ^= 0x10;
-
+    __delay_cycles(4500);
     P3OUT ^= 0x10;
     P4OUT = 0x01; // Clear Display
     P3OUT ^= 0x10;
-
+    __delay_cycles(4500);
     P3OUT ^= 0x10;
     P4OUT = 0x06; //Entry Mode Set
     P3OUT ^= 0x10;
-
+    __delay_cycles(4500);
     P3OUT ^= 0x10;
     P4OUT = 0x0F; //Display ON/OFF
     P3OUT ^= 0x10;
@@ -95,21 +98,21 @@ void clear_display(){
     }
     return_home_top_display();
 }
-void button_increment(char* messages, int* x){
+void button_increment(char** messages,volatile unsigned int* i){
     clear_display();
     return_home_top_display();
-    print_string(messages[i]);
-    i= (i+1)%16;
+    print_string(messages[*i]);
+    *i= ((*i)+1)%16;
     return_home_bottom_display();
-    print_string(messages[i]);
+    print_string(messages[*i]);
 }
-void button_decrement(char* messages, int* x){
+void button_decrement(char** messages,volatile unsigned int* i){
     clear_display();
-    return_home_top_display();
-    print_string(messages[i]);
-    i= (i-1)%16;
     return_home_bottom_display();
-    print_string(messages[i]);
+    print_string(messages[*i]);
+    *i= ((*i)-1)%16;
+    return_home_top_display();
+    print_string(messages[*i]);
 }
 void main(void)
 {
@@ -117,7 +120,7 @@ void main(void)
     WDTCTL = WDTPW | WDTHOLD;       // stop watchdog timer
     P3DIR = 0xF0; // P3.4 = E, P3.5 = RS, P3.6 = R/W, P3.7 = D7
     P4DIR= 0xEF; //P4.0 = D0, P4.1 = D1, P4.2 = D2, P4.3 = D3, P4.5 = D4, P4.6 = D5, P4.7 = D6
-    P5DIR = 0x30; // P5.4 = Pushbutton 1, P5.5 = Pushbutton 2
+    P5DIR = 0x00; // P5.4 = Pushbutton 1, P5.5 = Pushbutton 2
     P3OUT = 0x00;
     init();
     return_home_top_display();
@@ -126,10 +129,22 @@ void main(void)
                          "UwU5","UwU6","UwU7","UwU8",
                          "UwU9","UwU10","UwU11","UwU12",
                          "UwU13","UwU14","UwU15","UwU16"};
+
     volatile unsigned int i=0;      // volatile to prevent optimization
 
-    while (1) {
 
-            __delay_cycles(50000);
+    while (1) {
+           if(!(P5IN & 0x10)){
+               button_increment(messages,&i);
+               __delay_cycles(50000);
+               __delay_cycles(50000);
+           }
+           if(P5IN & 0x20){
+               button_decrement(messages,&i);
+               __delay_cycles(50000);
+               __delay_cycles(50000);
+           }
+           __delay_cycles(50000);
+           __delay_cycles(50000);
         }
 }
