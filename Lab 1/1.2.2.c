@@ -95,13 +95,29 @@ void clear_display(){
     }
     return_home_top_display();
 }
-
+void button_increment(char* messages, int* x){
+    clear_display();
+    return_home_top_display();
+    print_string(messages[i]);
+    i= (i+1)%16;
+    return_home_bottom_display();
+    print_string(messages[i]);
+}
+void button_decrement(char* messages, int* x){
+    clear_display();
+    return_home_top_display();
+    print_string(messages[i]);
+    i= (i-1)%16;
+    return_home_bottom_display();
+    print_string(messages[i]);
+}
 void main(void)
 {
 
     WDTCTL = WDTPW | WDTHOLD;       // stop watchdog timer
     P3DIR = 0xF0; // P3.4 = E, P3.5 = RS, P3.6 = R/W, P3.7 = D7
     P4DIR= 0xEF; //P4.0 = D0, P4.1 = D1, P4.2 = D2, P4.3 = D3, P4.5 = D4, P4.6 = D5, P4.7 = D6
+    P5DIR = 0x30; // P5.4 = Pushbutton 1, P5.5 = Pushbutton 2
     P3OUT = 0x00;
     init();
     return_home_top_display();
@@ -114,12 +130,6 @@ void main(void)
 
     while (1) {
 
-            clear_display();
-            return_home_top_display();
-            print_string(messages[i]);
-            i= (i+1)%16;
-            return_home_bottom_display();
-            print_string(messages[i]);
             __delay_cycles(50000);
         }
 }
