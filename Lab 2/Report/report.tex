@@ -1,6 +1,6 @@
 \documentclass[journal]{IEEEtran} \hyphenation{op-tical net-works
   semi-conduc-tor} \usepackage{textgreek} \usepackage{graphicx}
-\usepackage{listings} \usepackage{hyperref}
+\usepackage{listings} \usepackage{hyperref} \usepackage{float}
 \begin{document}
 \title{Experiment 2 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves, Enrique Chompre Gonzalez}
@@ -41,13 +41,25 @@ The software plan for the complementary task is as follows:
   \item Display new elements of the list of strings depending on which
         pushbutton is being pressed.
 \end{enumerate}
-\vspace{7cm} Wiring Diagram:
-\begin{figure}[ht]
+Wiring Diagram:
+\begin{figure}[H]
   \centering \includegraphics[width=0.4\textwidth]{./Figures/wiring-diagram.png}
   \caption{Wiring Diagram for LCD display and MCU}
 \end{figure}
 \section{Results}
-The source code is located on GitHub
+\begin{figure}[H]
+  \centering \includegraphics[width=0.4\textwidth]{./Figures/initialization.jpg}
+  \caption{The LCD after it being initialized}
+\end{figure}
+\begin{figure}[H]
+  \centering \includegraphics[width=0.4\textwidth]{./Figures/increment.jpg}
+  \caption{The LCD displaying the incrementing through the list}
+\end{figure}
+\begin{figure}[H]
+  \centering \includegraphics[width=0.4\textwidth]{./Figures/decrement.jpg}
+  \caption{The LCD displaying the decrementing through the list}
+\end{figure}
+We were able to successfully able to intialize the LCD panel, display messages on both top and bottom displays, scroll through a list of strings on the display automatically and either scroll up or down using push buttons.
 \begin{thebibliography}{1}
 	\bibitem{rojasEmbeddedSystemsDesign2016}
 D. Rojas, L. Francisco, and M. Jiménez, Embedded Systems Design Laboratory Manual. Mayagüez: Electrical and Computer Engineering Department University of Puerto Rico at Mayagüez, 2016.
