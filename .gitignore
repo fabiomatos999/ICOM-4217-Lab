@@ -354,3 +354,6 @@ TSWLatexianTemp*
 #*Notes.bib
 
 *.pdf
+/.metadata/
+*.lf
+.jxbrowser*
