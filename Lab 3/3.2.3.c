@@ -13,8 +13,6 @@ void reset_buffer(){
 int main()
 {
     init();
-//   sprintf(str,"%d",100);
-//   print_string(str);
     __enable_interrupt();
     P1DIR = 0x00;
     P1REN = 0x04;
