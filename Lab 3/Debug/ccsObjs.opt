@@ -1,5 +1,6 @@
 "./3.2.1.obj"
 "./3.2.3.obj"
+"./3.2.4.obj"
 "../lnk_msp430f5438.cmd"
 -llibmath.a
 -llibc.a

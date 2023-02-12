@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./3.2.1.obj" \
 "./3.2.3.obj" \
+"./3.2.4.obj" \
 "../lnk_msp430f5438.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibmath.a \
@@ -143,8 +144,8 @@ Lab\ 3.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "3.2.1.obj" "3.2.3.obj" 
-	-$(RM) "3.2.1.d" "3.2.3.d" 
+	-$(RM) "3.2.1.obj" "3.2.3.obj" "3.2.4.obj" 
+	-$(RM) "3.2.1.d" "3.2.3.d" "3.2.4.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
