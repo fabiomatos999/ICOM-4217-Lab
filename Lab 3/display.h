@@ -56,6 +56,18 @@ void return_home_bottom_display()
     P3OUT ^= 0x10;
     P3OUT ^= 0x10;
 }
+void send_cursor_to_address(unsigned int address){
+    P3OUT = 0x08;
+    P4OUT |= ((((int) address) >> 6) & 1) << 7;
+    P4OUT |= ((((int) address) >> 5) & 1) << 6;
+    P4OUT |= ((((int) address) >> 4) & 1) << 5;
+    P4OUT |= ((((int) address) >> 3) & 1) << 3;
+    P4OUT |= ((((int) address) >> 2) & 1) << 2;
+    P4OUT |= ((((int) address) >> 1) & 1) << 1;
+    P4OUT |= ((((int) address) >> 0) & 1) << 0;
+    P3OUT ^= 0x10;
+    P3OUT ^= 0x10;
+}
 void input_char(char character)
 {
 
@@ -104,7 +116,7 @@ void clear_display()
     char *space = " ";
     for (j = 0; j < 128; j++)
     {
-        input_char(space[0]); // Will input a space character on all 80 spaces in the address counter and will reset cursor to the home of the top display
+        input_char(space[0]); // Will input a space character on all 128 spaces in the address counter and will reset cursor to the home of the top display
     }
     return_home_top_display();
 }
