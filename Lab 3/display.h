@@ -57,14 +57,19 @@ void return_home_bottom_display()
     P3OUT ^= 0x10;
 }
 void send_cursor_to_address(unsigned int address){
-    P3OUT = 0x08;
-    P4OUT |= ((((int) address) >> 6) & 1) << 7;
-    P4OUT |= ((((int) address) >> 5) & 1) << 6;
-    P4OUT |= ((((int) address) >> 4) & 1) << 5;
-    P4OUT |= ((((int) address) >> 3) & 1) << 3;
-    P4OUT |= ((((int) address) >> 2) & 1) << 2;
-    P4OUT |= ((((int) address) >> 1) & 1) << 1;
-    P4OUT |= ((((int) address) >> 0) & 1) << 0;
+    if (address == 0x00){
+        return_home_top_display();
+        return;
+    }
+    P4OUT = 0x00;
+    P3OUT = 0x80;
+    P4OUT |= (((address) >> 6) & 1) << 7;
+    P4OUT |= (((address) >> 5) & 1) << 6;
+    P4OUT |= (((address) >> 4) & 1) << 5;
+    P4OUT |= (((address) >> 3) & 1) << 3;
+    P4OUT |= (((address) >> 2) & 1) << 2;
+    P4OUT |= (((address) >> 1) & 1) << 1;
+    P4OUT |= (((address) >> 0) & 1) << 0;
     P3OUT ^= 0x10;
     P3OUT ^= 0x10;
 }
