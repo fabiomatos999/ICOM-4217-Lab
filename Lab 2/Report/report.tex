@@ -4,7 +4,6 @@
 \begin{document}
 \title{Experiment 2 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves, Enrique Chompre Gonzalez}
-\bibliographystyle{IEEtran}
 \maketitle
 \begin{abstract}
   The purpose of this document is to detail our implementation of the
@@ -17,7 +16,7 @@
 \section{Introduction}
 \IEEEPARstart{T}{he} complementary tasks for this laboratory assignment consist
 of using push buttons to make an LCD panel scroll through a list of 16 messages
-either up or down through the list. To accomplish this task we first had to get accustomed to using the MCU, which involved blinking an LED, pollling a switch and blinking an led with the push buttons. After the warmup exercises we had to first initialize the LCD, and make several functions such as clearing the display,
+either up or down through the list\cite{rojasEmbeddedSystemsDesign2016}. To accomplish this task we first had to get accustomed to using the MCU, which involved blinking an LED, pollling a switch and blinking an led with the push buttons. After the warmup exercises we had to first initialize the LCD, and make several functions such as clearing the display,
 moving the cursor to various positions, printing out a character and printing
 out a message
 \section{Materials and Methods}
@@ -26,7 +25,7 @@ List of Materials
   \item 1 Development Board
   \item 1 IDE Application
   \item 1 LCD Display: 2 lines 16 characters W/HD 44780
-        Controller
+        Controller \cite{LCDControllerDatasheets}
   \item 2 Light Emitting Diodes
   \item 2 330\textOmega \space1/4 W Carbon Fill Resistor
   \item 2 4.7K\textOmega \space1/4 W Carbon Fill Resistor
@@ -59,11 +58,7 @@ Wiring Diagram:
   \centering \includegraphics[width=0.4\textwidth]{./Figures/decrement.jpg}
   \caption{The LCD displaying the decrementing through the list}
 \end{figure}
-We were able to successfully able to intialize the LCD panel, display messages on both top and bottom displays, scroll through a list of strings on the display automatically and either scroll up or down using push buttons.
-\begin{thebibliography}{1}
-	\bibitem{rojasEmbeddedSystemsDesign2016}
-D. Rojas, L. Francisco, and M. Jiménez, Embedded Systems Design Laboratory Manual. Mayagüez: Electrical and Computer Engineering Department University of Puerto Rico at Mayagüez, 2016.
-\bibitem{LCDControllerDatasheets}
-‘LCD Controller Datasheets’. [Online]. Available: https://crystalfontz.com/controllers/. [Accessed: 07-Feb-2023].
-\end{thebibliography}
+We were able to successfully able to initialize the LCD panel, display messages on both top and bottom displays, scroll through a list of strings on the display automatically and either scroll up or down using push buttons.
+\bibliographystyle{IEEEtran}
+\bibliography{./references.bib}
 \end{document}
