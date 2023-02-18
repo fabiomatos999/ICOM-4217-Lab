@@ -28,7 +28,7 @@ int main(void)
 	P1IE |= 0x10;
     __enable_interrupt();
 	
-    _BIS_SR(LPM4_bits);
+    _BIS_SR(LPM0_bits);
 }
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void){
