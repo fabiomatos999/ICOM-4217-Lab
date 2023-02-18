@@ -5,14 +5,21 @@
  * main.c
  */
 // Bit Fields: https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm
-long half_periods[5] = {0x40,0x20,0x10,0x08,0x04};
-int index = 0;
-int half_period = half_periods[index];
+#define SIZE 5
+unsigned long half_periods[SIZE] = {0x20,0x10,0x11,0x09,0x06}; // Half Periods for 0.5, 1, 1.5, 2, 3 Khz respectively
+unsigned int index = 0;
+unsigned long half_period = 0x20;
+void update_half_period(unsigned int * i,  unsigned long * half){
+    *i = (++(*i))%SIZE;
+    *half = half_periods[*i];
+    TA0CCR0 = *half;
+    TA0R = 0;
+}
 int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	TA0CTL |= 0x112;
-	TA0CCR0 |= 0x20;
+	TA0CTL |= 0x110; // Setting Timer A0 using ACLK with 1 prescaler
+	TA0CCR0 = half_period;
 	P1DIR |= 0x04;
 	P1OUT |= 0x04;
 	P1REN |= 0x10;
@@ -22,7 +29,7 @@ int main(void)
     __enable_interrupt();
 	
 	while (1) {
-	    if(TA0R >= 0x20){
+	    if(TA0R >= half_period){
 	        TA0R = 0;
 	        P1OUT ^= 0x04;
 	    }
@@ -30,5 +37,7 @@ int main(void)
 }
 #pragma vector=PORT1_VECTOR
 __interrupt void PORT_1(){
-
+    update_half_period(&index,&half_period);
+    __delay_cycles(250000);
+    P1IFG &= ~0x10;
 }

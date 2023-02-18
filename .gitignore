@@ -357,3 +357,4 @@ TSWLatexianTemp*
 /.metadata/
 *.lf
 .jxbrowser*
+!/Lab Materials/*.pdf
