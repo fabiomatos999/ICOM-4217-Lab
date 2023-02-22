@@ -1,6 +1,6 @@
 \documentclass[journal]{IEEEtran} \hyphenation{op-tical net-works
   semi-conduc-tor} \usepackage{textgreek} \usepackage{graphicx}
-\usepackage{listings} \usepackage{hyperref} \usepackage{float}
+\usepackage{listings} \usepackage{hyperref} \usepackage{float} \usepackage{tabularx}
 \begin{document}
 \title{Experiment 3 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves, Enrique Chompre Gonzalez}
@@ -14,8 +14,36 @@
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \section{Introduction}
-\IEEEPARstart{T}{he}
+\IEEEPARstart{T}{he} purpose of this lab was to:
+\begin{enumerate}
+  \item Understanding the bouncing phenomena and the issues related
+  \item Identifying the main differences between hardware and software debouncing
+        techniques
+  \item Understanding how an interrupt process is carried out in an MCU
+  \item Using interrupt to read keys
+  \item Interfacing and using keypads with a microcontroller
+  \item Interfacing and using a rotary encoder with a microcontroller
+\end{enumerate}
 \section{Materials and Methods}
+Materials:
+\begin{itemize}
+  \item 1 Development Board
+  \item 1 IDE Application
+  \item 1 LCD display: 2 lines, 16 characters
+  \item 1 1/4W Carbon fill resistor 220\Omega
+  \item 1 1/4W Carbon fill resistor 2.7K\Omega
+  \item 1 1/4W Carbon fill resistor 3.3K\Omega
+  \item 2 1/4W Carbon fill resistor 4.7K\Omega
+  \item 2 1/4W Carbon fill resistor 12K\Omega
+  \item 1 Polarized electrolytic capacitor 4.7\mu
+  \item 2 Momentary switch
+  \item 1 3 columns by 4 rows Buttons array (Keypad 3x4)
+  \item 2 Optoswitch
+  \item 1 Schmitt trigger array
+\end{itemize}
+Methods:\\
+We first used a push button to increment a count in the microcontroller and then displayed that count to the LCD display used in the second laboratory experiment. Further on we implemented hardware debouncing on the push button in order to consistently increment the counter correctly. After this we implemented software debouncing using a boolean value and software delays in order to achieve similar results as the hardware debouncing without the need for hardware. Then we implemented a software decoder for a 3x4 keypad using interrupts in order to display the number pressed and manipulate the dislay if the */# symbols were pressed. Finally, a rotary encoder has implemented using 2 optoswitches and it was used to scroll through a list of messages that were being displayed on a LCD screen.
+\section{Results}
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
 \bibliographystyle{IEEEtran}
