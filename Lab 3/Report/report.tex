@@ -1,6 +1,11 @@
 \documentclass[journal]{IEEEtran} \hyphenation{op-tical net-works
   semi-conduc-tor} \usepackage{textgreek} \usepackage{graphicx}
 \usepackage{listings} \usepackage{hyperref} \usepackage{float} \usepackage{tabularx}
+\newcommand\createfigure[2]{
+  \begin{figure}[H]
+    \centering \includegraphics[width=0.4\textwidth]{#1}
+    \caption{#2}
+  \end{figure}}
 \begin{document}
 \title{Experiment 3 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves, Enrique Chompre Gonzalez}
@@ -42,8 +47,11 @@ Materials:
   \item 1 Schmitt trigger array
 \end{itemize}
 Methods:\\
-We first used a push button to increment a count in the microcontroller and then displayed that count to the LCD display used in the second laboratory experiment. Further on we implemented hardware debouncing on the push button in order to consistently increment the counter correctly. After this we implemented software debouncing using a boolean value and software delays in order to achieve similar results as the hardware debouncing without the need for hardware. Then we implemented a software decoder for a 3x4 keypad using interrupts in order to display the number pressed and manipulate the dislay if the \*\/\# symbols were pressed. Finally, a rotary encoder has implemented using 2 optoswitches and it was used to scroll through a list of messages that were being displayed on a LCD screen.
+We first used a push button to increment a count in the microcontroller and then displayed that count to the LCD display used in the second laboratory experiment. Further on we implemented hardware debouncing on the push button in order to consistently increment the counter correctly. After this we implemented software debouncing using a boolean value and software delays in order to achieve similar results as the hardware debouncing without the need for hardware. Then we implemented a software decoder for a 3x4 keypad using interrupts in order to display the number pressed and manipulate the display if the \*/\# symbols were pressed. Finally, a rotary encoder has implemented using 2 optoswitches and it was used to scroll through a list of messages that were being displayed on a LCD screen.
 \section{Results}
+\createfigure{./Figures/3.2.1.jpg}{Hardware Configuration for 3.2.1 and 3.2.3}
+\createfigure{./Figures/3.2.2.jpg}{Hardware Configuration for 3.2.2}
+\createfigure{./Figures/3.2.4.jpg}{Hardware Configuration for 3.2.4}
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
 \bibliographystyle{IEEEtran}

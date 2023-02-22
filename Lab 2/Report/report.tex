@@ -1,6 +1,11 @@
 \documentclass[journal]{IEEEtran} \hyphenation{op-tical net-works
   semi-conduc-tor} \usepackage{textgreek} \usepackage{graphicx}
 \usepackage{listings} \usepackage{hyperref} \usepackage{float}
+\newcommand\createfigure[2]{
+  \begin{figure}[H]
+    \centering \includegraphics[width=0.4\textwidth]{#1}
+    \caption{#2}
+  \end{figure}}
 \begin{document}
 \title{Experiment 2 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves, Enrique Chompre Gonzalez}
