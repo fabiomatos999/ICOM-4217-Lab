@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v20.2.2                     
 ******************************************************************************
->> Linked Wed Feb 22 17:28:28 2023
+>> Linked Fri Feb 24 13:54:18 2023
 
 OUTPUT FILE NAME:   <Lab 5.2.2.out>
-ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00005c00
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00005c36
 
 
 MEMORY CONFIGURATION
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   RAM                   00001c00   00004000  000000a0  00003f60  RWIX
-  FLASH                 00005c00   0000a380  00000024  0000a35c  RWIX
+  FLASH                 00005c00   0000a380  00000052  0000a32e  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -84,7 +84,7 @@ MEMORY CONFIGURATION
   INT61                 0000fffa   00000002  00000002  00000000  RWIX
   INT62                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FLASH2                00010000   00035bf8  00000044  00035bb4  RWIX
+  FLASH2                00010000   00035bf8  0000006a  00035b8e  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -97,10 +97,10 @@ section   page    origin      length       input sections
                   00005b64    0000009c     --HOLE--
 
 .text:_isr 
-*          0    00005c00    00000024     
-                  00005c00    00000014     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs)
-                  00005c14    00000008     main.obj (.text:_isr:Timer_A)
-                  00005c1c    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    00005c00    00000052     
+                  00005c00    00000036     main.obj (.text:_isr:PORT_1)
+                  00005c36    00000014     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs)
+                  00005c4a    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .cinit     0    00005c00    00000000     UNINITIALIZED
 
@@ -128,7 +128,7 @@ USCI_A1    0    0000ffdc    00000002
                   0000ffdc    00000002     rts430x_lc_rd_eabi.lib : int46.asm.obj (.int46)
 
 PORT1      0    0000ffde    00000002     
-                  0000ffde    00000002     rts430x_lc_rd_eabi.lib : int47.asm.obj (.int47)
+                  0000ffde    00000002     main.obj (.int47)
 
 TIMER1_A1 
 *          0    0000ffe0    00000002     
@@ -153,7 +153,7 @@ TIMER0_A1
 
 TIMER0_A0 
 *          0    0000ffec    00000002     
-                  0000ffec    00000002     main.obj (.int54)
+                  0000ffec    00000002     rts430x_lc_rd_eabi.lib : int54.asm.obj (.int54)
 
 ADC12      0    0000ffee    00000002     
                   0000ffee    00000002     rts430x_lc_rd_eabi.lib : int55.asm.obj (.int55)
@@ -184,22 +184,24 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    00000044     
-                  00010000    0000003a     main.obj (.text:main)
-                  0001003a    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  00010040    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+.text      0    00010000    0000006a     
+                  00010000    0000004a     main.obj (.text:main)
+                  0001004a    00000016     rts430x_lc_rd_eabi.lib : div16u.asm.obj (.text)
+                  00010060    00000006                            : exit.c.obj (.text:abort)
+                  00010066    00000004                            : pre_init.c.obj (.text:_system_pre_init)
 
 MODULE SUMMARY
 
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       main.obj           66     2         0      
+       main.obj           128    2         0      
     +--+------------------+------+---------+---------+
-       Total:             66     2         0      
+       Total:             128    2         0      
                                                   
     C:\ti\ccs1020\ccs\tools\compiler\ti-cgt-msp430_20.2.2.LTS\lib\rts430x_lc_rd_eabi.lib
        boot.c.obj         20     2         0      
+       div16u.asm.obj     22     0         0      
        isr_trap.asm.obj   8      0         0      
        exit.c.obj         6      0         0      
        pre_init.c.obj     4      0         0      
@@ -209,13 +211,13 @@ MODULE SUMMARY
        int44.asm.obj      0      2         0      
        int45.asm.obj      0      2         0      
        int46.asm.obj      0      2         0      
-       int47.asm.obj      0      2         0      
        int48.asm.obj      0      2         0      
        int49.asm.obj      0      2         0      
        int50.asm.obj      0      2         0      
        int51.asm.obj      0      2         0      
        int52.asm.obj      0      2         0      
        int53.asm.obj      0      2         0      
+       int54.asm.obj      0      2         0      
        int55.asm.obj      0      2         0      
        int56.asm.obj      0      2         0      
        int57.asm.obj      0      2         0      
@@ -225,11 +227,11 @@ MODULE SUMMARY
        int61.asm.obj      0      2         0      
        int62.asm.obj      0      2         0      
     +--+------------------+------+---------+---------+
-       Total:             38     44        0      
+       Total:             60     44        0      
                                                   
        Stack:             0      0         160    
     +--+------------------+------+---------+---------+
-       Grand Total:       104    46        160    
+       Grand Total:       188    46        160    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -318,7 +320,7 @@ address   name
 00000732  ADC12MEM9             
 00000733  ADC12MEM9_H           
 00000732  ADC12MEM9_L           
-0001003a  C$$EXIT               
+00010060  C$$EXIT               
 00000150  CRCDI                 
 00000151  CRCDI_H               
 00000150  CRCDI_L               
@@ -558,6 +560,7 @@ address   name
 0000012e  PMMRIE                
 0000012f  PMMRIE_H              
 0000012e  PMMRIE_L              
+00005c00  PORT_1                
 00000158  RCCTL0                
 00000159  RCCTL0_H              
 00000158  RCCTL0_L              
@@ -706,7 +709,6 @@ address   name
 000003e0  TB0EX0                
 000003ee  TB0IV                 
 000003d0  TB0R                  
-00005c14  Timer_A               
 000005d0  UCA0ABCTL             
 000005c6  UCA0BRW               
 000005c7  UCA0BRW_H             
@@ -887,7 +889,7 @@ address   name
 0000015c  WDTCTL_L              
 00005c00  __STACK_END           
 000000a0  __STACK_SIZE          
-00005c1c  __TI_ISR_TRAP         
+00005c4a  __TI_ISR_TRAP         
 0000ffd2  __TI_int41            
 0000ffd4  __TI_int42            
 0000ffd6  __TI_int43            
@@ -914,11 +916,13 @@ ffffffff  __TI_pprof_out_hndl
 ffffffff  __TI_prof_data_size   
 ffffffff  __TI_prof_data_start  
 ffffffff  __c_args__            
-00005c00  _c_int00_noinit_noargs
+0001004a  __mspabi_divu         
+0001004a  __mspabi_remu         
+00005c36  _c_int00_noinit_noargs
 0000fffe  _reset_vector         
 00005b60  _stack                
-00010040  _system_pre_init      
-0001003a  abort                 
+00010066  _system_pre_init      
+00010060  abort                 
 00010000  main                  
 
 
@@ -1575,10 +1579,10 @@ address   name
 0000073e  ADC12MEM15_L          
 0000073f  ADC12MEM15_H          
 00005b60  _stack                
+00005c00  PORT_1                
 00005c00  __STACK_END           
-00005c00  _c_int00_noinit_noargs
-00005c14  Timer_A               
-00005c1c  __TI_ISR_TRAP         
+00005c36  _c_int00_noinit_noargs
+00005c4a  __TI_ISR_TRAP         
 0000ffd2  __TI_int41            
 0000ffd4  __TI_int42            
 0000ffd6  __TI_int43            
@@ -1603,12 +1607,14 @@ address   name
 0000fffc  __TI_int62            
 0000fffe  _reset_vector         
 00010000  main                  
-0001003a  C$$EXIT               
-0001003a  abort                 
-00010040  _system_pre_init      
+0001004a  __mspabi_divu         
+0001004a  __mspabi_remu         
+00010060  C$$EXIT               
+00010060  abort                 
+00010066  _system_pre_init      
 ffffffff  __TI_pprof_out_hndl   
 ffffffff  __TI_prof_data_size   
 ffffffff  __TI_prof_data_start  
 ffffffff  __c_args__            
 
-[684 symbols]
+[686 symbols]

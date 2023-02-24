@@ -1,30 +1,32 @@
 #include <msp430.h> 
 
-
-/**
- * main.c
- */
 int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-    TA0CTL |= 0x110; // Setting Timer A0 using ACLK with 1 prescaler
-    TA0CCTL0 |= 0x10;
-    TA0CCR0 = 0x8000;
-    TA0CCR1 = 0x4000;
-    TA0CCTL1 |= 0xE0;
-    P1DIR = 0x10;
-    P1OUT = 0x10;
-//    P1REN = 0x10;
-    __enable_interrupt();
+	P1DIR |= BIT2;
+	P1IES |= BIT3;
+	P1REN  |= BIT3;
+	P1IFG &= ~BIT3;
+	P1IE |= BIT3;
+	__enable_interrupt();
+    P1SEL |= BIT2;
+	//Timer A0 Setup
+    TA0CTL |= TASSEL_2 + MC_1;
+    TA0CCTL1 |= OUTMOD_7;
+//    TA0CCR0 = 287; // 1KHz
+//    TA0CCR0 = 287*2; // 500Hz
+//    TA0CCR0 = 287/2; // 2 KHz
+//    TA0CCR0 = 287/4; // 4 KHz
+    TA0CCR0 = 1000; // 8 KHz
+    TA0CCR1 = TA0CCR0/2;
 
-	
-//	_BIS_SR(LPM0_bits);
-    while (1){
+    _bis_SR_register(LPM0_bits);
 
-    }
 }
-
-#pragma vector=TIMER0_A0_VECTOR
-__interrupt void Timer_A(void){
-    P1OUT ^= 0x10;
+#pragma vector=PORT1_VECTOR
+__interrupt void PORT_1(){
+    TA0CCR1 += 100;
+    TA0CCR1 %= 1100;
+    __delay_cycles(250000);
+    P1IFG &= ~BIT3;
 }
