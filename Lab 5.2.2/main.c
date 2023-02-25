@@ -13,11 +13,11 @@ int main(void)
 	//Timer A0 Setup
     TA0CTL |= TASSEL_2 + MC_1;
     TA0CCTL1 |= OUTMOD_7;
-//    TA0CCR0 = 287; // 1KHz
-//    TA0CCR0 = 287*2; // 500Hz
-//    TA0CCR0 = 287/2; // 2 KHz
-//    TA0CCR0 = 287/4; // 4 KHz
-    TA0CCR0 = 1000; // 8 KHz
+//    TA0CCR0 = 1000; // 1KHz
+//    TA0CCR0 = 1000*2; // 500Hz
+//    TA0CCR0 = 1000/2; // 2 KHz
+//    TA0CCR0 = 1000/4; // 4 KHz
+    TA0CCR0 = 1000/8; // 8 KHz
     TA0CCR1 = TA0CCR0/2;
 
     _bis_SR_register(LPM0_bits);
