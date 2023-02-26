@@ -92,6 +92,35 @@ Firstly we setup the development board using the program and hardware configurat
   \caption{Timer MCU Values}
   \end{center}
 \end{table}
+In section 5.2.3 we controlled an RGB LED using 3 timers by controlling the duty cycle of each timer independently. To do this we created a struct of 8 bit RGB values for the red, green and blue and based on the value will set the duty cycle for the red, green or blue LED between 0\% and 100\%. Afterwards we created a lookup table for 8 different RGB values and cycle through the lookup table using a pushbutton.
+\begin{table}[H]
+  \begin{center}
+  \begin{tabularx}{0.4\textwidth}{|X|X|X|X|}
+    \hline
+    \rowcolor{gray}
+     & R & G & B \\
+    \hline
+    \textbf{1} & 0 & 0 & 255\\
+    \hline
+    \textbf{2} & 0 & 255 & 0\\
+    \hline
+    \textbf{3} & 255 & 0 & 0\\
+    \hline
+    \textbf{4} & 255 & 30 & 217\\
+    \hline
+    \textbf{5} & 30 & 222 & 252\\
+    \hline
+    \textbf{6} & 240 & 200 & 40\\
+    \hline
+    \textbf{7} & 255 & 123 & 33\\
+    \hline
+    \textbf{8} & 255 & 255 & 255\\
+    \hline
+  \end{tabularx}
+  \caption{RGB Color Values}
+  \end{center}
+\end{table}
+In section 5.3.1 we created a header file for functions related keypad created in Experiment 3 and used the header file for the LCD functions created in Experiment 2 to modulate an LED from 0\% brightness to 100\% brightness and display the brightness level on the LCD display.
 \section{Results}
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
