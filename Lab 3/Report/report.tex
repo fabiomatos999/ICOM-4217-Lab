@@ -7,27 +7,18 @@
     \caption{#2}
   \end{figure}}
 \begin{document}
-\title{Experiment 3 Complementary Tasks\\ Lab Report} \author{Fabio J. Matos
+\title{Experiment 3 Tasks\\ Lab Report} \author{Fabio J. Matos
   Nieves (802-18-6134), Enrique Chompre Gonzalez (802-18-6106), Guillermo Colón Bernardi (802-18-6106)}
 \maketitle
 \begin{abstract}
   The purpose of this document is to detail an implementation a push button using interrupts and debouncing technique and implementing a keypad decoder using an MSP430 microcontroller.
 \end{abstract}
 \begin{IEEEkeywords}
-  MCU, LDC, Display, Pins, Keypad, Interrupt
+  MCU, LDC, Display, Pins, Keypad, Interrupt, IR, GPIO
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \section{Introduction}
-\IEEEPARstart{T}{he} purpose of this lab was to:\\
-\begin{enumerate}
-  \item Understanding the bouncing phenomena and the issues related
-  \item Identifying the main differences between hardware and software debouncing
-        techniques
-  \item Understanding how an interrupt process is carried out in an MCU
-  \item Using interrupt to read keys
-  \item Interfacing and using keypads with a microcontroller
-  \item Interfacing and using a rotary encoder with a microcontroller
-\end{enumerate}
+\IEEEPARstart{T}{he} first task of this assignment was to implement a pushbutton and counter for a push button on a LCD display using interrupts. An interrupt is a software/hardware function that pauses what a processor is doing and executes an interrupt service routine (ISR) which is defined by the programmer. When the push button is pressed a counter incremented and the current count is displayed on the LCD displayed using the library developed in experiment 2. A problem occurs that when a button is pressed the MCU detects that it has been pressed multipletimes even though the user thinks that it has been pressed once. This problem is called bouncing and in the second and third parts the assignment hardware and software debouncing for the pushbutton was implemented. Hardware debouncing entails the use of an RC circuit to send a single pulse to the MCU I/O pin and not be able to send another since the capacitor is charging to a level where the MCU can classify it as a high input. In software debouncing a delay from a timer or from the main function is executed by occupying the CPU with empty instructions like an empty for loop wait while the bouncing from the switch has finished. For the fourth task of this laboratory assignment is implementing a 3x4 keypad decoder by using a combination of interrupts and polling. A keypad is a MxN array of characters that the columns are sent as inputs an MCU and the rows are polled one at a time and with the row and column know any key on the keypad can be decoded to its correct value. During the complementary task 2 optoswitches were used to create a rotary encoder to scroll through a list on messages on an LCD in a similar fashion to the complementary task from experiment 2. An optoswitch is device with an infrared LED and a transistor that is sensitive to infrared (IR) light. If the material absorbs IR light. the transistor turns off and the GPIO pin is set to low. If the material reflects IR lights, the transistor turns on and the pin is set to high. Using a rotary wheel, a sense of direction can be established from the combination of patterns on the wheel and this can be translated to a scrolling motion on the display.
 \section{Materials and Methods}
 Materials:
 \begin{itemize}
@@ -46,7 +37,7 @@ Materials:
   \item 1 Schmitt trigger array
 \end{itemize}
 Methods:\\
-\IEEEPARstart{W}{e} first used a push button to increment a count in the microcontroller and then displayed that count to the LCD display used in the second laboratory experiment. Further on we implemented hardware debouncing on the push button in order to consistently increment the counter correctly. After this we implemented software debouncing using a boolean value and software delays in order to achieve similar results as the hardware debouncing without the need for aditional hardware. Then we implemented a software decoder for a 3x4 keypad using interrupts in order to display the number pressed and manipulate the display if the \# or * symbols were pressed. Finally, a rotary encoder has implemented using 2 optoswitches and it was used to scroll through a list of messages that were being displayed on a LCD screen.
+First a push button was used to increment a count in the microcontroller and then displayed that count to the LCD display used in the second laboratory experiment. Further on hardware debouncing was implemented on the push button in order to consistently increment the counter correctly. After this software debouncing was implemented using a boolean value and software delays in order to achieve similar (albeit not as consistent as hardware debouncing) results as the hardware debouncing without the need for additional hardware. Then a software decoder for a 3x4 keypad using interrupts and polling was implemented in order to display the number pressed and manipulate the display if the \# or * symbols were pressed. Finally, a rotary encoder has implemented using 2 optoswitches and it was used to scroll through a list of messages that were being displayed on a LCD screen.
 \section{Results}
 \createfigure{./Figures/3.2.1.jpg}{Hardware Configuration for 3.2.1 and 3.2.3}
 \createfigure{./Figures/3.2.2.jpg}{Hardware Configuration for 3.2.2}
