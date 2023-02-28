@@ -10,7 +10,7 @@ typedef struct photodiodeState
     unsigned int outer :1;
     unsigned int inner :1;
 } photodiodeState;
-photodiodeState state[4] = { { 0, 0 }, { 0, 1 }, { 1, 1 }, { 1, 0 } };
+photodiodeState state[4] = {{0,0 },{ 0, 1 }, { 1, 1 }, { 1, 0 } };
 unsigned volatile int index = 0;
 unsigned int messages_index = 0;
 char *messages[16] = { "UwU1", "UwU2", "UwU3", "UwU4", "UwU5", "UwU6",
@@ -24,41 +24,27 @@ void decrement_messages_index(){
 }
 unsigned int find_index(unsigned int outer, unsigned int inner)
 {
-    unsigned int i = 0;
-    unsigned int ret = 0;
-    for (; i < 4; i++)
-    {
-        if (state[i].outer == outer && state[i].inner == inner)
-        {
-            ret = i;
-            break;
-        }
+    if (outer == 0 && inner == 0){
+        return 0;
     }
-    return ret;
+    else if (outer == 0 && inner == 1){
+        return 1;
+    }
+    else if(outer == 1 && inner == 1){
+        return 2;
+    }
+    else {
+        return 3;
+    }
+
 }
-void main(void)
-{
-
-
-    WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-    init();
-    return_home_top_display();
-    P1DIR = 0x00;
-//    P1REN = 0x30;
-    P1IFG &= ~0x30;
-    P1IE = 0x30;
-    __enable_interrupt();
-
-    _BIS_SR(LPM0_bits);
-}
-
 void move_left_or_right(unsigned int curr_index)
 {
-    if(curr_index == 3 && index == 0){
+    if(curr_index == 0 && index == 3){
         increment_messages_index();
         button_increment(messages,&messages_index);
     }
-    else if (curr_index == 0 && index == 3){
+    else if (curr_index == 3 && index == 0){
         decrement_messages_index();
         button_decrement(messages,&messages_index);
     }
@@ -75,19 +61,25 @@ void move_left_or_right(unsigned int curr_index)
     index = curr_index;
 }
 
-#pragma vector=PORT1_VECTOR
-__interrupt void PORT_1()
+void main(void)
 {
-    unsigned volatile int outer = (P1IFG >> 5)&1;
-    unsigned volatile int inner = (P1IFG >> 4)&1;
-    unsigned int index = find_index(outer, inner);
-    move_left_or_right(index);
-    if (outer)
-    {
-        P1IFG &= ~0x20;
-    }
-    if (inner)
-    {
-        P1IFG &= ~0x10;
+
+
+    WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+    init();
+    return_home_top_display();
+    P1DIR = 0x00;
+    unsigned volatile int outer = 0;
+    unsigned volatile int inner = 0;
+    unsigned volatile int index = 0;
+
+    while (1){
+        outer = (P1IN >> 5)&1;
+        inner = (P1IN >> 4)&1;
+        index = find_index(outer, inner);
+        move_left_or_right(index);
     }
 }
+
+
+
