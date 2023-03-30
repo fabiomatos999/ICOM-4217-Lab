@@ -1,10 +1,5 @@
 #include <msp430.h> 
 
-
-/**
- * main.c
- */
-
 void moveFullStep();
 void moveHalfStep();
 
