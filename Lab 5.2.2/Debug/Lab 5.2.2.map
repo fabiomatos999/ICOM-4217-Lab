@@ -1,7 +1,7 @@
 ******************************************************************************
-                  MSP430 Linker PC v20.2.2                     
+                  MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Feb 24 13:54:18 2023
+>> Linked Wed Mar  1 15:33:50 2023
 
 OUTPUT FILE NAME:   <Lab 5.2.2.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00005c36
@@ -102,7 +102,7 @@ section   page    origin      length       input sections
                   00005c36    00000014     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs)
                   00005c4a    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
-.cinit     0    00005c00    00000000     UNINITIALIZED
+.cinit     0    00005c00    00000000     
 
 .binit     0    00005c00    00000000     
 
@@ -199,7 +199,7 @@ MODULE SUMMARY
     +--+------------------+------+---------+---------+
        Total:             128    2         0      
                                                   
-    C:\ti\ccs1020\ccs\tools\compiler\ti-cgt-msp430_20.2.2.LTS\lib\rts430x_lc_rd_eabi.lib
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
        boot.c.obj         20     2         0      
        div16u.asm.obj     22     0         0      
        isr_trap.asm.obj   8      0         0      
@@ -889,6 +889,9 @@ address   name
 0000015c  WDTCTL_L              
 00005c00  __STACK_END           
 000000a0  __STACK_SIZE          
+00005c00  __TI_CINIT_Base       
+00005c00  __TI_CINIT_Limit      
+00005c00  __TI_CINIT_Warm       
 00005c4a  __TI_ISR_TRAP         
 0000ffd2  __TI_int41            
 0000ffd4  __TI_int42            
@@ -1581,6 +1584,9 @@ address   name
 00005b60  _stack                
 00005c00  PORT_1                
 00005c00  __STACK_END           
+00005c00  __TI_CINIT_Base       
+00005c00  __TI_CINIT_Limit      
+00005c00  __TI_CINIT_Warm       
 00005c36  _c_int00_noinit_noargs
 00005c4a  __TI_ISR_TRAP         
 0000ffd2  __TI_int41            
@@ -1617,4 +1623,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start  
 ffffffff  __c_args__            
 
-[686 symbols]
+[689 symbols]

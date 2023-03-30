@@ -1,7 +1,7 @@
 ******************************************************************************
-                  MSP430 Linker PC v20.2.2                     
+                  MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Wed Feb 22 09:40:12 2023
+>> Linked Wed Mar  8 15:25:47 2023
 
 OUTPUT FILE NAME:   <Lab 3.2.2.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005c40
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   RAM                   00001c00   00004000  000000b2  00003f4e  RWIX
-  FLASH                 00005c00   0000a380  00000096  0000a2ea  RWIX
+  FLASH                 00005c00   0000a380  000000a8  0000a2d8  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -106,20 +106,20 @@ section   page    origin      length       input sections
                   00005c40    0000001c     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
                   00005c5c    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
-.cinit     0    00005c7e    00000018     
-                  00005c7e    00000008     (__TI_handler_table)
-                  00005c86    00000007     (.cinit..data.load) [load image, compression = lzss]
-                  00005c8d    00000001     --HOLE-- [fill = 0]
-                  00005c8e    00000008     (__TI_cinit_table)
+.cinit     0    00005c90    00000018     
+                  00005c90    00000008     (__TI_handler_table)
+                  00005c98    00000007     (.cinit..data.load) [load image, compression = lzss]
+                  00005c9f    00000001     --HOLE-- [fill = 0]
+                  00005ca0    00000008     (__TI_cinit_table)
 
 .binit     0    00005c00    00000000     
 
 .init_array 
 *          0    00005c00    00000000     UNINITIALIZED
 
-.const     0    00005c64    0000001a     
-                  00005c64    00000014     rts430x_lc_rd_eabi.lib : _printfi_min.c.obj (.const:.string)
-                  00005c78    00000006     main.obj (.const:.string)
+.const     0    00005c64    0000002c     
+                  00005c64    00000026     rts430x_lc_rd_eabi.lib : _printfi.c.obj (.const:.string)
+                  00005c8a    00000006     main.obj (.const:.string)
 
 RTC        0    0000ffd2    00000002     
                   0000ffd2    00000002     rts430x_lc_rd_eabi.lib : int41.asm.obj (.int41)
@@ -197,14 +197,14 @@ SYSNMI     0    0000fffc    00000002
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
 .text      0    00010000    0000073c     
-                  00010000    00000132     rts430x_lc_rd_eabi.lib : _printfi_min.c.obj (.text:_setfield)
+                  00010000    00000132     rts430x_lc_rd_eabi.lib : _printfi.c.obj (.text:__TI_printfi_minimal:_setfield___TI_printfi_minimal)
                   00010132    00000126     main.obj (.text:init)
-                  00010258    000000dc     rts430x_lc_rd_eabi.lib : _printfi_min.c.obj (.text:__TI_printfi_minimal)
-                  00010334    000000da                            : _printfi_min.c.obj (.text:_pproc_diouxp)
+                  00010258    000000dc     rts430x_lc_rd_eabi.lib : _printfi.c.obj (.text:__TI_printfi_minimal:__TI_printfi_minimal)
+                  00010334    000000da                            : _printfi.c.obj (.text:__TI_printfi_minimal:_pproc_diouxp___TI_printfi_minimal)
                   0001040e    00000076                            : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
                   00010484    00000068     main.obj (.text:input_char)
                   000104ec    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  00010540    00000048                            : _printfi_min.c.obj (.text:_pproc_str)
+                  00010540    00000048                            : _printfi.c.obj (.text:__TI_printfi_minimal:_pproc_str___TI_printfi_minimal)
                   00010588    00000044                            : sprintf.c.obj (.text:sprintf)
                   000105cc    00000026                            : memccpy.c.obj (.text:memccpy)
                   000105f2    00000022     main.obj (.text:main)
@@ -233,8 +233,8 @@ MODULE SUMMARY
     +--+----------------------------+------+---------+---------+
        Total:                       608    8         18     
                                                             
-    C:\ti\ccs1020\ccs\tools\compiler\ti-cgt-msp430_20.2.2.LTS\lib\rts430x_lc_rd_eabi.lib
-       _printfi_min.c.obj           816    20        0      
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
+       _printfi.c.obj               816    38        0      
        sprintf.c.obj                120    0         0      
        copy_decompress_lzss.c.obj   118    0         0      
        autoinit.c.obj               84     0         0      
@@ -272,23 +272,23 @@ MODULE SUMMARY
        int62.asm.obj                0      2         0      
        startup.c.obj                2      0         0      
     +--+----------------------------+------+---------+---------+
-       Total:                       1344   64        0      
+       Total:                       1344   82        0      
                                                             
        Stack:                       0      0         160    
        Linker Generated:            0      23        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 1952   95        178    
+       Grand Total:                 1952   113       178    
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00005c8e records: 1, size/record: 8, table size: 8
-	.data: load addr=00005c86, load size=00000007 bytes, run addr=00001c00, run size=00000012 bytes, compression=lzss
+__TI_cinit_table @ 00005ca0 records: 1, size/record: 8, table size: 8
+	.data: load addr=00005c98, load size=00000007 bytes, run addr=00001c00, run size=00000012 bytes, compression=lzss
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00005c7e records: 2, size/record: 4, table size: 8
+__TI_handler_table @ 00005c90 records: 2, size/record: 4, table size: 8
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 
@@ -949,10 +949,11 @@ address   name
 0000015c  WDTCTL_L                               
 00005c00  __STACK_END                            
 000000a0  __STACK_SIZE                           
-00005c8e  __TI_CINIT_Base                        
-00005c96  __TI_CINIT_Limit                       
-00005c7e  __TI_Handler_Table_Base                
-00005c86  __TI_Handler_Table_Limit               
+00005ca0  __TI_CINIT_Base                        
+00005ca8  __TI_CINIT_Limit                       
+00005ca8  __TI_CINIT_Warm                        
+00005c90  __TI_Handler_Table_Base                
+00005c98  __TI_Handler_Table_Limit               
 00005c5c  __TI_ISR_TRAP                          
 000104ec  __TI_auto_init_nobinit_nopinit_hold_wdt
 0001040e  __TI_decompress_lzss                   
@@ -1667,10 +1668,11 @@ address   name
 00005c00  __STACK_END                            
 00005c40  _c_int00_noargs                        
 00005c5c  __TI_ISR_TRAP                          
-00005c7e  __TI_Handler_Table_Base                
-00005c86  __TI_Handler_Table_Limit               
-00005c8e  __TI_CINIT_Base                        
-00005c96  __TI_CINIT_Limit                       
+00005c90  __TI_Handler_Table_Base                
+00005c98  __TI_Handler_Table_Limit               
+00005ca0  __TI_CINIT_Base                        
+00005ca8  __TI_CINIT_Limit                       
+00005ca8  __TI_CINIT_Warm                        
 0000ffd2  __TI_int41                             
 0000ffd4  __TI_int42                             
 0000ffd6  __TI_int43                             
@@ -1722,4 +1724,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[709 symbols]
+[710 symbols]

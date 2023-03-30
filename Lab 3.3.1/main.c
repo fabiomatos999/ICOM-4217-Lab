@@ -65,7 +65,7 @@ void main(void)
 {
 
 
-    WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
     init();
     return_home_top_display();
     P1DIR = 0x00;
@@ -80,6 +80,3 @@ void main(void)
         move_left_or_right(index);
     }
 }
-
-
-

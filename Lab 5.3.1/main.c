@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #define PERIOD 1000
-char BUFFER[5] = "0%\0";
+char BUFFER[15] = "Level: 0%\0";
 void display_brightness_if_pressed();
 void adjust_brightness();
 int main(void)
@@ -79,7 +79,7 @@ void display_brightness_if_pressed(){
         clear_display();
         return_home_top_display();
         adjust_brightness();
-        sprintf(BUFFER,"Level: %d %d%c",(unsigned int)((((float)TA0CCR1)/((float)(PERIOD)))*10.0,(unsigned int)((((float)TA0CCR1)/((float)(PERIOD)))*100.0), '%');
+        sprintf(BUFFER,"Level: %d %d%c",(unsigned int)((((float)TA0CCR1)/((float)(PERIOD)))*10.0),(unsigned int)((((float)TA0CCR1)/((float)(PERIOD)))*100.0), '%');
         print_string(BUFFER);
         pressed = 0;
     }

@@ -2,6 +2,8 @@
 
 #define PERIOD 1000
 
+//
+
 typedef struct RGB
 {
     unsigned int r :8;

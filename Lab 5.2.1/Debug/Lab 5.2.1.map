@@ -1,7 +1,7 @@
 ******************************************************************************
-                  MSP430 Linker PC v20.2.2                     
+                  MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Feb 24 12:11:16 2023
+>> Linked Wed Mar  1 14:02:49 2023
 
 OUTPUT FILE NAME:   <Lab 5.2.1.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005c68
@@ -223,7 +223,7 @@ MODULE SUMMARY
     +--+----------------------------+------+---------+---------+
        Total:                       820    100       66     
                                                             
-    C:\ti\ccs1020\ccs\tools\compiler\ti-cgt-msp430_20.2.2.LTS\lib\rts430x_lc_rd_eabi.lib
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
        copy_decompress_lzss.c.obj   118    0         0      
        autoinit.c.obj               84     0         0      
        boot.c.obj                   28     2         0      
@@ -934,6 +934,7 @@ address   name
 000000a0  __STACK_SIZE                           
 00005d32  __TI_CINIT_Base                        
 00005d3a  __TI_CINIT_Limit                       
+00005d3a  __TI_CINIT_Warm                        
 00005d2a  __TI_Handler_Table_Base                
 00005d32  __TI_Handler_Table_Limit               
 00005c84  __TI_ISR_TRAP                          
@@ -1650,6 +1651,7 @@ address   name
 00005d32  __TI_CINIT_Base                        
 00005d32  __TI_Handler_Table_Limit               
 00005d3a  __TI_CINIT_Limit                       
+00005d3a  __TI_CINIT_Warm                        
 0000ffd2  __TI_int41                             
 0000ffd4  __TI_int42                             
 0000ffd6  __TI_int43                             
@@ -1696,4 +1698,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[704 symbols]
+[705 symbols]
