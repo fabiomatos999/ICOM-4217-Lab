@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Sat Feb 18 11:16:59 2023
+>> Linked Sun Apr  2 14:57:24 2023
 
 OUTPUT FILE NAME:   <Lab 4.2.2.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005c2e
@@ -84,7 +84,7 @@ MEMORY CONFIGURATION
   INT61                 0000fffa   00000002  00000002  00000000  RWIX
   INT62                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FLASH2                00010000   00035bf8  0000018a  00035a6e  RWIX
+  FLASH2                00010000   00035bf8  00000184  00035a74  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -193,26 +193,26 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    0000018a     
+.text      0    00010000    00000184     
                   00010000    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
                   00010076    00000054                            : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  000100ca    00000048     main.obj (.text:main)
-                  00010112    00000030     main.obj (.text:update_half_period)
-                  00010142    00000016     rts430x_lc_rd_eabi.lib : div16u.asm.obj (.text)
-                  00010158    00000014                            : memcpy.c.obj (.text:memcpy)
-                  0001016c    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0001017e    00000006                            : exit.c.obj (.text:abort)
-                  00010184    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-                  00010188    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  000100ca    00000042     main.obj (.text:main)
+                  0001010c    00000030     main.obj (.text:update_half_period)
+                  0001013c    00000016     rts430x_lc_rd_eabi.lib : div16u.asm.obj (.text)
+                  00010152    00000014                            : memcpy.c.obj (.text:memcpy)
+                  00010166    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00010178    00000006                            : exit.c.obj (.text:abort)
+                  0001017e    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  00010182    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     172    4         26     
+       main.obj                     166    4         26     
     +--+----------------------------+------+---------+---------+
-       Total:                       172    4         26     
+       Total:                       166    4         26     
                                                             
     C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
        copy_decompress_lzss.c.obj   118    0         0      
@@ -251,7 +251,7 @@ MODULE SUMMARY
        Stack:                       0      0         160    
        Linker Generated:            0      41        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 482    87        186    
+       Grand Total:                 476    87        186    
 
 
 LINKER GENERATED COPY TABLES
@@ -353,7 +353,7 @@ address   name
 00000732  ADC12MEM9                              
 00000733  ADC12MEM9_H                            
 00000732  ADC12MEM9_L                            
-0001017e  C$$EXIT                                
+00010178  C$$EXIT                                
 00000150  CRCDI                                  
 00000151  CRCDI_H                                
 00000150  CRCDI_L                                
@@ -931,7 +931,7 @@ address   name
 00005c4a  __TI_ISR_TRAP                          
 00010076  __TI_auto_init_nobinit_nopinit_hold_wdt
 00010000  __TI_decompress_lzss                   
-0001016c  __TI_decompress_none                   
+00010166  __TI_decompress_none                   
 0000ffd2  __TI_int41                             
 0000ffd4  __TI_int42                             
 0000ffd6  __TI_int43                             
@@ -958,20 +958,20 @@ ffffffff  __TI_pprof_out_hndl
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
-00010142  __mspabi_divu                          
-00010142  __mspabi_remu                          
+0001013c  __mspabi_divu                          
+0001013c  __mspabi_remu                          
 00005c2e  _c_int00_noargs                        
 0000fffe  _reset_vector                          
 00005b60  _stack                                 
-00010188  _system_post_cinit                     
-00010184  _system_pre_init                       
-0001017e  abort                                  
+00010182  _system_post_cinit                     
+0001017e  _system_pre_init                       
+00010178  abort                                  
 00001c16  half_period                            
 00001c00  half_periods                           
 00001c14  index                                  
 000100ca  main                                   
-00010158  memcpy                                 
-00010112  update_half_period                     
+00010152  memcpy                                 
+0001010c  update_half_period                     
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -1666,15 +1666,15 @@ address   name
 00010000  __TI_decompress_lzss                   
 00010076  __TI_auto_init_nobinit_nopinit_hold_wdt
 000100ca  main                                   
-00010112  update_half_period                     
-00010142  __mspabi_divu                          
-00010142  __mspabi_remu                          
-00010158  memcpy                                 
-0001016c  __TI_decompress_none                   
-0001017e  C$$EXIT                                
-0001017e  abort                                  
-00010184  _system_pre_init                       
-00010188  _system_post_cinit                     
+0001010c  update_half_period                     
+0001013c  __mspabi_divu                          
+0001013c  __mspabi_remu                          
+00010152  memcpy                                 
+00010166  __TI_decompress_none                   
+00010178  C$$EXIT                                
+00010178  abort                                  
+0001017e  _system_pre_init                       
+00010182  _system_post_cinit                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
