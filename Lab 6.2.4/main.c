@@ -8,9 +8,9 @@ void moveDeg(unsigned int deg, direction dir);
 
 typedef struct input {
     unsigned int a:1;
-    unsigned int bbar:1;
-    unsigned int abar:1;
     unsigned int b:1;
+    unsigned int abar:1;
+    unsigned int bbar:1;
 } input;
 
 
@@ -47,7 +47,7 @@ void moveFullStep(direction dir){
         return;
     }
     volatile input step = fullstep[currstep];
-    P1OUT = ~((fullstep[currstep].a<<0) + (fullstep[currstep].bbar<<1) + (fullstep[currstep].abar<<2) + (fullstep[currstep].b<<3));
+    P1OUT = ~((fullstep[currstep].a<<0) + (fullstep[currstep].b<<1) + (fullstep[currstep].abar<<2) + (fullstep[currstep].abar<<3));
 }
 
 void moveHalfStep(direction dir){
@@ -65,12 +65,14 @@ void moveHalfStep(direction dir){
         currdirr = NONE;
         return;
     }
-    P1OUT = ~((halfstep[currstep].a<<0) + (halfstep[currstep].bbar<<1) + (halfstep[currstep].abar<<2) + (halfstep[currstep].b<<3));
+    P1OUT = ~((halfstep[currstep].a<<0) + (halfstep[currstep].b<<1) + (halfstep[currstep].abar<<2) + (halfstep[currstep].bbar<<3));
 }
 
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void){
-    moveFullStep(currdirr);
+    if (currdirr != NONE) {
+        moveFullStep(currdirr);
+    }
 }
 
 void moveSteps(unsigned int deg, direction dir){
