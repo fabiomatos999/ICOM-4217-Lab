@@ -18,12 +18,9 @@ typedef struct input
     unsigned int bbar :1;
 } input;
 
-input fullstep[4] = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0,
-                                                                        1 } };
-input halfstep[8] = { { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 1, 0, 0 }, { 0, 1, 1,
-                                                                        0 },
-                      { 0, 0, 1, 0 }, { 0, 0, 1, 1 }, { 0, 0, 0, 1 }, { 1, 0, 0,
-                                                                        1 } };
+input fullstep[4] = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+input halfstep[8] = { { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 1, 0, 0 }, { 0, 1, 1, 0 },
+                      { 0, 0, 1, 0 }, { 0, 0, 1, 1 }, { 0, 0, 0, 1 }, { 1, 0, 0, 1 } };
 
 int currstep = 0;
 unsigned int degree = 0;
@@ -87,7 +84,9 @@ void moveHalfStep(direction dir)
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void)
 {
-    if(stepcount > degree/5.625)
+    volatile int a;
+    a = degree/5.625;
+    if(stepcount > degree/(5.625/8))
     {
         stepcount = 0;
         currdirr = NONE;
