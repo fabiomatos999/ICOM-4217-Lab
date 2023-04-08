@@ -14,7 +14,9 @@ int main(){
     UCA0CTL1 &= ~UCSWRST;
     UCA0IE |= UCTXIE;
     __enable_interrupt();
-   __bis_SR_register(LPM0_bits);
+    while(1){
+        __delay_cycles(4294967295);
+    }
 }
 
 #pragma vector=USCI_A0_VECTOR
@@ -31,8 +33,12 @@ __interrupt void USCI_A0_ISR(){
             UCA0TXBUF = (char) 13;
             index+=1;
         }
-        break;
+        else {
+            UCA0TXBUF = 0;
+            UCA0RXBUF = 0;
+            UCA0IE = 0;
+
+        }
     default: break;
     }
-    __bic_SR_register_on_exit(LPM0_bits);
 }
