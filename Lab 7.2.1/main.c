@@ -14,15 +14,11 @@ int main(){
     UCA0CTL1 &= ~UCSWRST;
     UCA0IE |= UCTXIE;
     __enable_interrupt();
-    while(1){
-
-    }
+   __bis_SR_register(LPM0_bits);
 }
 
 #pragma vector=USCI_A0_VECTOR
 __interrupt void USCI_A0_ISR(){
-    unsigned volatile int curr = index;
-   volatile char currchar = hello[index];
     switch(__even_in_range(UCA0IV,4)){
     case 0: break;
     case 2: break;
@@ -31,11 +27,12 @@ __interrupt void USCI_A0_ISR(){
             UCA0TXBUF = hello[index];
             index+=1;
         }
-        else {
+        else if (index == BUFF_SIZE) {
             UCA0TXBUF = (char) 13;
+            index+=1;
         }
         break;
     default: break;
     }
-//    __bic_SR_register_on_exit(LPM0_bits);
+    __bic_SR_register_on_exit(LPM0_bits);
 }
