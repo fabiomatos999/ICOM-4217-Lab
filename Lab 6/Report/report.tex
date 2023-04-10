@@ -28,7 +28,113 @@
 \IEEEPARstart{T}{he} first task for this laboratory assignment consists driving a DC motor using a half H-Bridge Driver. A DC motor is a motor that only has positive and negative terminals and runs at maximum speed when the voltage is at the recommended maximum. An H-Bridge driver is a set of complementary transistorsthat are driven by 2 pins on a microcontroller that allow for the reverse and forward current flow within a motor which allows a DC motor to move clockwise or counterclockwise depending on which set of transistors are on or off at any given time. The second task for this assignment was exactly the same of the first but using an IC H-Bridge driver for the motor instead of the through hole transistor array. The third task of this assignment was to drive a servo motor at various angles. A servo motor is type of motor with 3 pins going to it, VDD, ground and control. The control pin is used to send a 50\si{\Hz} PWM signal with a duty cycle between 5\% and 12.5\% going from \ang{-90} to \ang{90}. The fourth assignment consists of driving a stepper motor using a Darlington Transistor Array.
 \section{Materials and Methods}
 Materials:
+\begin{itemize}
+  \item 1 Development board
+  \item 1 IDE application
+  \item 1 LCD display: 2 lines, 16 characters
+  \item 2 1/4W Carbon fill resistor 22\si{\ohm}
+  \item 4 1/4W Carbon fill resistor 330\si{\ohm}
+  \item 2 1/4W Carbon fill resistor 4.7\si{\kilo\ohm}
+  \item 2 1/4W Carbon fill resistor 12\si{\kilo\ohm}
+  \item 4 P-N junction diode
+  \item 2 BJT NPN transistor
+  \item 2 BJT PNP transistor
+  \item 2 Momentary Switch
+  \item 2 Optocoupler
+  \item 1 Half H-bridge Driver
+  \item 1 Darlington Transistor Array
+  \item 2 Optoswitch
+  \item 1 DC Motor, 6VDC, 9100rpm, 0.14Oz-in
+  \item 1 Stepper, 5VDC, Unipolar, 11.25 step angle
+  \item 1 Servo, 6VDC, 38Oz-in, 180 Range
+\end{itemize}
+Methods:\\
+Firstly, the MCU was connected to the $M_{IN}$ pins on the H-bridge, also connecting 5\si{\V} and GND. Later, the following lookup was programmed to be executed by pressing 3 separate push buttons:
+\begin{table}[H]
+  \begin{center}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  \multicolumn{4}{|c|}{Motor}\\
+  \hline
+  Button&Motor Action&S1&S2\\
+  \hline
+  1&Step Free&0&0\\
+  2&Rot. Left&0&1\\
+  3&Rot Right&1&0\\
+  \hline
+\end{tabular}
+  \end{center}
+\end{table}
+The reason why there is no 1,1 output, it would short circuit the H-Bridge and burn the transistors.\\
+Secondly, the same code base as the previous task was used but instead of a transistor based H-bridge, an IC was used. The only difference between the H-Bridge with transistors and the IC is that the IC has an enable line that needs to be high to send the code to the motor.\\
+Thirdly, a servo motor was programmed to move to specific angles in a certain sequence. This was implemented by first creating a function that converts a given angle to a PWM pulse width that then dictates what angle the servo will position itself. Then a circular lookup table was written so that the servo can cycle between the following positions:
+\begin{table}[!ht]
+\begin{tabular}{|c|c|c|}
+  \hline
+  Angle Displacement&Servo Angle Position&Necessary Pulse-Width\\
+  \hline
+  22.5 to the left&\ang{22.5}&0.75\si{\milli\second}\\
+  \hline
+  90 to the left&\ang{112.5}&1.75\si{\milli\second}\\
+  \hline
+  22.5 to the right&\ang{90}&1.5\si{\milli\second}\\
+  \hline
+  45 to the left&\ang{135}&2\si{\milli\second}\\
+  \hline
+  90 to the right&\ang{45}&1\si{\milli\second}\\
+  \hline
+  135 to the left&\ang{180}&2.5\si{\milli\second}\\
+  \hline
+  22.5 to the right&\ang{157.5}&2.25\si{\milli\second}\\
+  \hline
+  90 to the right&\ang{67.5}&1.25\si{\milli\second}\\
+  \hline
+  67.5 to the right&\ang{0}&0.5\si{\milli\second}\\
+  \hline
+\end{tabular}
+\end{table}
+Fourthly, an MSP430 was programmed to move a 28BYJ-48 servo motor in clockwise and counter clockwise rotation. To accomplish this, a struct of the $A,\overline{A},B,\overline{B}$ inputs was created and then 2 lookup tables of the inputs were created to cycle through the inputs in a circular fashion. Then a function where the motor would move to a specific angle was created to then move \ang{270} counter-clockwise, \ang{180} counter-clockwise and then \ang{90} clockwise.\\
+Finally, for the complementary task for this assignment, a push button interface was created to increase/decrease the speed of the servo motor until it would no longer move through \ang{720} of movement without skiping steps. The following table demonstrates the tested frequencies:
+\begin{center}
+\begin{table}[!h]
+  \begin{tabularx}{0.4\textwidth}{|X|X|X|X|}
+   \hline
+    Sig. Period \si{\milli\second}&Sig. Freq.\si{\milli\second}&Motor Speed (RPM)&Critical Freq. (yes/no)\\
+   \hline
+    100&10&11.718&No\\
+   \hline
+    50&20&23.4375&No\\
+   \hline
+    20&50&58.59375&No\\
+   \hline
+    10&100&117.1875&No\\
+   \hline
+    5&200&234.375&No\\
+   \hline
+    2&500&585.9375&No\\
+   \hline
+    1&1000&1171.875&No\\
+   \hline
+    0.5&2000&2343.75&Yes\\
+   \hline
+    0.2&5000&5859.375&Yes\\
+   \hline
+    0.1&10000&11718.75&Yes\\
+   \hline
+  \end{tabularx}
+\end{table}
+\end{center}
 \section{Results}
+\createfigure{./Figures/6.2.1.jpeg}{Assignment 6.2.1 Hardware Setup}
+This assignment was unable to be completed due to the H-Bridge driver not functioning properly, the pushbuttons work as well as the outputs but not the H-Bridge.
+\createfigure{./Figures/6.2.2.jpeg}{Assignment 6.2.2 Hardware Setup}
+This assignment was unable to be completed due to the IC H-Bridge driver not functioning properly, the pushbuttons work as well as the outputs but not the H-Bridge.
+\createfigure{./Figures/6.2.3.jpeg}{Assignment 6.2.3 Hardware Setup}
+This assignment was successfully completed, it cycles through the positions on the lookup table when the MCU boots.
+\createfigure{./Figures/6.2.4.jpeg}{Assignment 6.2.4 Hardware Setup}
+This assignment was successfully completed, it moves to the 3 predetermined positions and then stops when the MCU goes into low power mode.
+\createfigure{./Figures/6.3.1.jpeg}{Assignment 6.3.1 Hardware Setup}
+This assignment was succesfully completed. The first button is the start/stop, the second is up and the third is down.
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
 \bibliographystyle{IEEEtran}
