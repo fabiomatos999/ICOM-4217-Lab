@@ -5,6 +5,7 @@ unsigned int index = 0;
 char hello[BUFF_SIZE] = "Hello World!\n";
 
 int main(){
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
     P3SEL = BIT4 + BIT5;
     UCA0CTL1 |= UCSWRST;
     UCA0CTL1 |= UCSSEL_2;
