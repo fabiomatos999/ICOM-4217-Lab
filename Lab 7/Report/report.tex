@@ -1,0 +1,42 @@
+\documentclass[journal]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{unicode}
+\usepackage[table]{xcolor}
+\newcommand\createfigure[2]{
+  \begin{figure}[H]
+    \centering \includegraphics[width=0.4\textwidth]{#1}
+    \caption{#2}
+  \end{figure}}
+\begin{document}
+\title{Experiment 6 Tasks\\ Lab Report} \author{Fabio J. Matos
+  Nieves (802-18-6134), Enrique Chompre Gonzalez (802-18-6106), \\Guillermo Colón Bernardi (802-16-1272)}
+\maketitle
+\begin{abstract}
+  The purpose of this document is to detail an implementation of the UART and I\textsuperscript{2}C communication protocols using an MSP430 microcontroller, a RS-232-USB adapter, and a I\textsuperscript{2}C real time clock chip.
+\end{abstract}
+\begin{IEEEkeywords}
+  MCU, UART, I\textsuperscript{2}C, RTC, RS-232, USB, LCD
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+\section{Introduction}
+\IEEEPARstart{T}{he} first task of this laboratory assignment consists of configuring a UART controller on a MSP430 to send a ``Hello World!'' message via a RS-232 to USB adapter. UART is a asynchronous communication protocol used in a wise variety of applications such as bluetooth adapters and RS-232. Asynchronous in this context refers to the fact that the clock signals for the sender and receiver are not the same, but their communication speed is matched, i.e if the sender is operating at 9600 baud, the receiver also has to operate at 9600 baud. For the second task of this assignment, a computer and an LCD was used to send write characters to the LCD via the UART. Note, the LCD is the same as used in previous laboratory assignments. The third task of this laboratory assignment consists of configuring MSP430 to communicate with a real time clock (RTC) using the I\textsuperscript{2}C protocol.
+\section{Materials and Methods}
+Materials:
+\begin{itemize}
+  \item 1 Development board
+  \item 1 IDE application
+  \item 1 LCD display: 2 lines, 16 characters
+\end{itemize}
+Methods:\\
+\section{Results}
+\nocite{rojasEmbeddedSystemsDesign2016}
+\nocite{LCDControllerDatasheets}
+\bibliographystyle{IEEEtran}
+\bibliography{./references.bib}
+\end{document}
