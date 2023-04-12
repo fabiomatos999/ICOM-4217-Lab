@@ -2,9 +2,15 @@
 #include <display.h>
 
 unsigned char curr_char = ' ';
+unsigned char message[17];
+unsigned int index = 0;
+
+void resetBuffer();
+
 
 int main(){
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+    resetBuffer();
     init();
     clear_display();
     return_home_top_display();
@@ -27,10 +33,38 @@ __interrupt void USCI_A3_ISR(){
     case 2:
         curr_char = UCA3RXBUF;
         input_char(curr_char);
-        UCA3TXBUF = curr_char;
+        message[index] = curr_char;
+        index +=1;
+        if (index > 16)
+        {
+            index = 0;
+            UCA3IE |= UCTXIE;
+        }
         break;
-    case 4: break;
+    case 4:
+        if (index < 16){
+            UCA3TXBUF = message[index];
+            index +=1;
+        }
+        else if (index == 17){
+            UCA3TXBUF = '\n';
+            index +=1;
+        }
+        else {
+            UCA3TXBUF = '\r';
+            resetBuffer();
+            index = 0;
+            UCA3IE &= ~UCTXIE;
+        }
+        break;
     default: break;
     }
     __bic_SR_register_on_exit(LPM0_bits);
+}
+
+void resetBuffer(){
+    int i = 0;
+    for(i=0;i<16;i++){
+        message[i] = '\0';
+    }
 }
