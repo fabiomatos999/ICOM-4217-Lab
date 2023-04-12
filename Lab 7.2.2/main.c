@@ -43,7 +43,7 @@ __interrupt void USCI_A3_ISR(){
         break;
     case 4:
         if (index < 16){
-            UCA3TXBUF = message[index];
+            UCA3TXBUF = (unsigned char)(message[index]-32);
             index +=1;
         }
         else if (index == 17){
