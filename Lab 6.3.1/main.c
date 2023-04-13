@@ -37,7 +37,7 @@ unsigned long stepcount = 0;
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
-    TA0CTL = TASSEL_2 + MC_1;   // Set Timer_A clock source to SMCLK, and count up mode 
+    TA0CTL = TASSEL_2 + MC_1;   // Set Timer_A clock source to SMCLK, and count up mode
     TA0CCTL0 = CCIE; // Enable Timer_A capture/compare interrupt
     TA0CCR0 = periods[period]; // Set the compare value for Timer_A to the value at index 0 of "periods" array
     P10DIR = 0x0F; // Set Port 10 pins 0-3 as output
@@ -60,7 +60,7 @@ void moveFullStep(direction dir)
     volatile int step;
 
     // sets the output of Port 10 pins 0 and 1 based on the current step in the sequence + sets the output of Port 10 pins 2 and 3 based on the current step in the sequence
-    P10OUT = ((fullstep[currstep].a << 0) + (fullstep[currstep].b << 1) 
+    P10OUT = ((fullstep[currstep].a << 0) + (fullstep[currstep].b << 1)
             + (fullstep[currstep].abar << 2) + (fullstep[currstep].bbar << 3));
 
 
@@ -104,8 +104,8 @@ void moveHalfStep(direction dir) // A function that takes in the direction param
 __interrupt void Timer_A(void)
 {
     volatile int a = degree/(5.625/8); // calculates the number of steps to rotate the stepper motor by dividing the desired degree value by the angle per step and saves it in a volatile integer variable 'a'
-    volatile int b = stepcount; 
-    if(stepcount > degree/(5.625/8)) 
+    volatile int b = stepcount;
+    if(stepcount > degree/(5.625/8))
 
     {
         stepcount = 0;
@@ -125,7 +125,7 @@ void moveDeg(unsigned int deg, direction dir)
 }
 
 #pragma vector=PORT1_VECTOR // specifies that the following function is an ISR for Port 1
-__interrupt void PORT_1() 
+__interrupt void PORT_1()
 {
     unsigned int b1 = (P1IFG >> 2) & 1; // checks if the interrupt flag for Pin 2 of Port 1 is set and stores the result in an unsigned integer variable 'b1'
     unsigned int b2 = (P1IFG >> 4) & 1; // checks if the interrupt flag for Pin 4 of Port 1 is set and stores the result in an unsigned integer variable 'b2'
@@ -142,7 +142,7 @@ __interrupt void PORT_1()
             currdirr = NONE;
         }
         TA0R = 0;
-        __delay_cycles(100000);
+        __delay_cycles(500000);
 
         P1IFG &= ~BIT2;
     }
@@ -154,7 +154,7 @@ __interrupt void PORT_1()
         }
         index = period;
         TA0CCR0 = periods[period];
-        __delay_cycles(100000);
+        __delay_cycles(500000);
         P1IFG &= ~BIT4;
         TA0R = 0;
     }
@@ -168,7 +168,7 @@ __interrupt void PORT_1()
         index = period;
         TA0CCR0 = periods[period];
 
-        __delay_cycles(100000);
+        __delay_cycles(500000);
         P1IFG &= ~BIT5;
         TA0R = 0;
     }

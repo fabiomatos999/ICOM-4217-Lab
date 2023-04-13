@@ -55,11 +55,11 @@ void moveFullStep(direction dir)
             based on their combination. */
 
 
-    if (dir == CW) // if the direction input is CW (clockwise)
+    if (dir == CCW) // if the direction input is CW (clockwise)
     {
         currstep = (++currstep) % 4; // increment the current step by 1 and wrap around to 0 if it exceeds 3
     }
-    else if (dir == CCW) // if the direction input is CCW (counterclockwise)
+    else if (dir == CW) // if the direction input is CCW (counterclockwise)
     {
         currstep -= 1; 
         if (currstep < 0){
@@ -80,11 +80,11 @@ void moveHalfStep(direction dir)
             + (halfstep[currstep].abar << 2) + (halfstep[currstep].bbar << 3));
 
     // Update the current step position based on the direction
-    if (dir == CW)
+    if (dir == CCW)
     {
         currstep = (++currstep) % 8; 
     }
-    else if (dir == CCW)
+    else if (dir == CW)
     {
         currstep -= 1;
         if (currstep < 0){
