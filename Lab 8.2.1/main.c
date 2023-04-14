@@ -1,7 +1,9 @@
 #include <msp430.h> 
+#include <math.h>
 
 unsigned int dacValues[] = {0x00,0x17,0x2E,0x45,0x5C,0x73,0x8A,0xA1,0xB8,0xCF,0xE6,0xFF};
 
+int degree = 0;
 unsigned int index = 0;
 
 int main(void)
@@ -10,16 +12,29 @@ int main(void)
 	P10DIR = 0xFF;
 	
     //Timer A0 Setup
-    TA0CTL |= TASSEL_1 + MC_1; // Select ACLK as the clock source and put the timer into Up mode
-    TA0CCR0 = 32768;  // Set the value in TA0CCR0 to achieve a frequency of 1Hz
+    TA0CTL |= TASSEL_1 + MC_1;
+    TA0CCR0 = 32768;
+
+//    TA1CTL |= TASSEL_2 + MC_1;
+    TA1CCR0 = 1048576/500;
 
 
-	return 0;
+	__bis_SR_register(LPM0_bits + GIE);
 }
 
-#pragma vector=TIMER0_A0_VECTOR // specifies that the following function is an interrupt service routine (ISR) for Timer_A
-__interrupt void Timer_A(void)
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A0(void)
 {
     P10OUT = dacValues[index];
     index = (++index)%12;
+}
+
+#pragma vector=TIMER1_A0_VECTOR
+__interrupt void Timer_A1(void)
+{
+    if(degree > 360){
+        degree = 0;
+    }
+    P10OUT = floor(128*sin((degree*M_PI)/180));
+    degree += 1;
 }
