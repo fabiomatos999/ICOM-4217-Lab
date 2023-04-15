@@ -5,6 +5,7 @@ unsigned char curr_char = ' ';
 unsigned char message[17];
 unsigned int index = 0;
 
+unsigned int position = 0;
 void resetBuffer();
 
 
@@ -35,6 +36,15 @@ __interrupt void USCI_A3_ISR(){
         input_char(curr_char);
         message[index] = curr_char;
         index +=1;
+        position+=1;
+        if (position > 0x0F && position < 0x40){
+            return_home_bottom_display();
+            position = 0x40;
+        }
+        else if (position > 0x4F){
+            return_home_top_display();
+            position = 0x00;
+        }
         if (index > 16)
         {
             index = 0;
@@ -42,15 +52,13 @@ __interrupt void USCI_A3_ISR(){
         }
         break;
     case 4:
-        if (index < 16){
+        if (index < 15){
             UCA3TXBUF = (unsigned char)(message[index]-32);
             index +=1;
         }
-        else if (index == 17){
-            UCA3TXBUF = '\n';
-            index +=1;
-        }
         else {
+            UCA3TXBUF = '\n';
+            __delay_cycles(100000);
             UCA3TXBUF = '\r';
             resetBuffer();
             index = 0;
