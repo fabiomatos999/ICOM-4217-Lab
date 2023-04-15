@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Apr 14 13:58:17 2023
+>> Linked Sat Apr 15 16:14:25 2023
 
 OUTPUT FILE NAME:   <Lab 7.2.2.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005cb8
@@ -18,7 +18,7 @@ MEMORY CONFIGURATION
   INFOC                 00001880   00000080  00000000  00000080  RWIX
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
-  RAM                   00001c00   00004000  000000b8  00003f48  RWIX
+  RAM                   00001c00   00004000  000000b6  00003f4a  RWIX
   FLASH                 00005c00   0000a380  00000108  0000a278  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
@@ -92,11 +92,11 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.bss       0    00001c00    00000012     UNINITIALIZED
-                  00001c00    00000012     (.common:message)
+.bss       0    00001c00    00000010     UNINITIALIZED
+                  00001c00    00000010     (.common:message)
 
-.data      0    00001c12    00000006     UNINITIALIZED
-                  00001c12    00000006     main.obj (.data)
+.data      0    00001c10    00000006     UNINITIALIZED
+                  00001c10    00000006     main.obj (.data)
 
 .stack     0    00005b60    000000a0     UNINITIALIZED
                   00005b60    00000004     rts430x_lc_rd_eabi.lib : boot.c.obj (.stack)
@@ -219,9 +219,9 @@ MODULE SUMMARY
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     762    4         24     
+       main.obj                     762    4         22     
     +--+----------------------------+------+---------+---------+
-       Total:                       762    4         24     
+       Total:                       762    4         22     
                                                             
     C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
        copy_decompress_lzss.c.obj   118    0         0      
@@ -261,14 +261,14 @@ MODULE SUMMARY
        Stack:                       0      0         160    
        Linker Generated:            0      42        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 1086   90        184    
+       Grand Total:                 1086   90        182    
 
 
 LINKER GENERATED COPY TABLES
 
 __TI_cinit_table @ 00005cf8 records: 2, size/record: 8, table size: 16
-	.data: load addr=00005cea, load size=00000008 bytes, run addr=00001c12, run size=00000006 bytes, compression=lzss
-	.bss: load addr=00005cf2, load size=00000006 bytes, run addr=00001c00, run size=00000012 bytes, compression=zero_init
+	.data: load addr=00005cea, load size=00000008 bytes, run addr=00001c10, run size=00000006 bytes, compression=lzss
+	.bss: load addr=00005cf2, load size=00000006 bytes, run addr=00001c00, run size=00000010 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
@@ -977,14 +977,14 @@ ffffffff  __c_args__
 0001035c  _system_pre_init                       
 00010356  abort                                  
 000102c8  clear_display                          
-00001c12  curr_char                              
-00001c14  index                                  
+00001c10  curr_char                              
+00001c12  index                                  
 00010000  init                                   
 0001019c  input_char                             
 00010258  main                                   
 00010330  memcpy                                 
 00001c00  message                                
-00001c16  position                               
+00001c14  position                               
 0001031a  resetBuffer                            
 000102e8  return_home_bottom_display             
 00010302  return_home_top_display                
@@ -1643,9 +1643,9 @@ address   name
 0000073e  ADC12MEM15_L                           
 0000073f  ADC12MEM15_H                           
 00001c00  message                                
-00001c12  curr_char                              
-00001c14  index                                  
-00001c16  position                               
+00001c10  curr_char                              
+00001c12  index                                  
+00001c14  position                               
 00005b60  _stack                                 
 00005c00  USCI_A3_ISR                            
 00005c00  __STACK_END                            

@@ -2,7 +2,7 @@
 #include <display.h>
 
 unsigned char curr_char = ' ';
-unsigned char message[17];
+unsigned char message[16];
 unsigned int index = 0;
 
 unsigned int position = 0;

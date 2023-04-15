@@ -14,9 +14,13 @@ int main(void)
     //Timer A0 Setup
     TA0CTL |= TASSEL_1 + MC_1;
     TA0CCR0 = 32768;
+    TA0CCTL0 = CCIE; // enable timer A0 interrupt
+
 
 //    TA1CTL |= TASSEL_2 + MC_1;
     TA1CCR0 = 1048576/500;
+    TA1CCTL0 = CCIE; // enable timer A0 interrupt
+
 
 
 	__bis_SR_register(LPM0_bits + GIE);
