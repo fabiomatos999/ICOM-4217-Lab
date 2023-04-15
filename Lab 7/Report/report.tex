@@ -14,8 +14,8 @@
     \caption{#2}
   \end{figure}}
 \begin{document}
-\title{Experiment 6 Tasks\\ Lab Report} \author{Fabio J. Matos
-  Nieves (802-18-6134), Enrique Chompre Gonzalez (802-18-6106), \\Guillermo Colón Bernardi (802-16-1272)}
+\title{Experiment 7 Tasks\\ Lab Report} \author{Fabio J. Matos
+  Nieves (802-18-6134), Enrique Chompre Gonzalez (802-18-6106)}
 \maketitle
 \begin{abstract}
   The purpose of this document is to detail an implementation of the UART and I\textsuperscript{2}C communication protocols using an MSP430 microcontroller, a RS-232-USB adapter, and a I\textsuperscript{2}C real time clock chip.
@@ -25,25 +25,26 @@
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \section{Introduction}
-\IEEEPARstart{T}{he} first task of this laboratory assignment consists of configuring a UART controller on a MSP430 to send a ``Hello World!'' message via a RS-232 to USB adapter. UART is a asynchronous communication protocol used in a wise variety of applications such as Bluetooth adapters and RS-232. Asynchronous in this context refers to the fact that the clock signals for the sender and receiver are not the same, but their communication speed is matched, i.e if the sender is operating at 9600 baud, the receiver also has to operate at 9600 baud. For the second task of this assignment, a computer and an LCD was used to send write characters to the LCD via the UART. Note, the LCD is the same as used in previous laboratory assignments. The third task of this laboratory assignment consists of configuring MSP430 to communicate with a real time clock (RTC) using the I\textsuperscript{2}C protocol and display the time since boot on an LCD display. I\textsuperscript{2}C is communication protocol like UART but it is synchronous, meaning it uses the master clock for synchronization, and it only has 1 channel for data (SDA). The complementary task for this assignment is an extention of the third task that implements an alarm clock with 3 push buttons and shows the date and time on an LCD.
+\IEEEPARstart{T}{he} first task of this laboratory assignment consists of configuring a UART controller on a MSP430 to send a ``Hello World!'' message via a RS-232 to USB adapter. UART is a asynchronous communication protocol used in a wise variety of applications such as bluetooth adapters and RS-232. Asynchronous in this context refers to the fact that the clock signals for the sender and receiver are not the same, but their communication speed is matched, i.e if the sender is operating at 9600 baud, the receiver also has to operate at 9600 baud. For the second task of this assignment, a computer and an LCD was used to send write characters to the LCD via the UART. Note, the LCD is the same as used in previous laboratory assignments. The third task of this laboratory assignment consists of configuring MSP430 to communicate with a real time clock (RTC) using the I\textsuperscript{2}C protocol.
 \section{Materials and Methods}
 Materials:
 \begin{itemize}
   \item 1 Development board
   \item 1 IDE application
   \item 1 LCD display: 2 lines, 16 characters
-  \item 1 1/4\si{\watt} Carbon fill resistor 1\si{\kilo\ohm}
-  \item 5 1/4\si{\watt} Carbon fill resistor 4.7\si{\kilo\ohm}
-  \item 3 Momentary Switch
-  \item I\textsuperscript{2}C Real-Time clock calendar
-  \item 1 Quartz crystal
-  \item 1 3V Lithium Battery
-  \item 1 Piezoelectric buzzer
-  \item 1 USB-To-UART converter cable
 \end{itemize}
 Methods:\\
-The first complementary task was implemented by first finding a correct combination of  clock prescaler and modulation pattern that minimizes that error in transmission. Luckily, the table 36-4 from the MSP430 x5xx and x6xx gives a table of clock prescalers and modulation patterns that minimize error when transmitting and receiving data. Since, according to the assignment the baud rate that was selected was 9600 baud, the combination of clock source, clock prescaler and modulation pattern that minimizes error is using a 1.048576\si{\mega\hertz} clock source, a 109 prescaler value and modulation pattern 2. Then transmitter interrupts were enabled and an ISR was created to print of the string ``Hello World!'' trough the transmitter channel 1 character at a time when the transmitter is ready to send. Finally, a newline and a carrage return is inserted at the end to indicate a end of transmition.\\ The second assignment was just a extention of the first, that being that instead of handling transmitter interrupts, it handles receiver interrupts from the USB-RS232 adapter, and sending them to an LCD display. To accomplish this, the ISR from the previous assignment was modified to handle receiver interrupts and in the main function enabled receiver interrupts and disbled transmitter interrupts. Within the receiver ISR the received character is copied to a global variable and then that global variable is sent to the LCD display via a library function. As an added bonus, the characters sent to the LCD are also sent to the serial monitor via the transmitter.\\
+The first task for this assignment was implemented by first finding which ports on the MSPEXP-4305438 are the TXD and RXD ports for UARTA0, which are P3.4 and P3.5. Then the ports where selected to use their peripheral functions instead of acting like GPIO. Then the UART was reset to be able to configure it. Then the UART was configured in asynchronous UART mode using the SMCLK clock source. In order to be able to achieve a baud rate of 9600 using the 1.048576\si{\mega\hertz} clock source, a prescaller of 109 and a modulation pattern of 2 was chosen in accordance with the MSP430 datasheet. Then transmitter interrupts where enabled, the UART reset flag was cleared and the MCU was sent to a low power mode along with enabling global interrupts. Then in the global scope an array of characters containing the phrase ``Hello World!''  was initialized along with an index for the current character. Then an ISR handle for the UART was written to able transmitter interrupts where when an interrupt is fired, the transmitter buffer is ready to be written to, writes the character at current character index, updates the index and then returns from an interrupt. When the string is written to the screen, a new line and carrage return is appended and then transmitter interrupts are disabled.\\
+For the second task of this assignment, the UART configuration is exactly the same but using P10.4 and P10.5 and thus using UART\_A3. Then initially receiver interrupts are enabled while transmitter interrupts are disabled, with the receiver sending the inputs from the serial port to a buffer. When the buffer reaches a size of 16, transmitter interrupts are enabled, printing the message in the buffer in a similar fashion as the first assignment by transmitting the uppercase version of the character and then resetting the index and buffer and disabling the transmitter interrupts when finished.\\
+Tasks 7.23 and 7.3.1 were not completed due to time constraints.
 \section{Results}
+\createfigure{./Figures/7.2.1-1.jpg}{Task 7.2.1 Hardware Setup}
+\createfigure{./Figures/7.2.1-2.jpg}{Task 7.2.1 UART Output}
+Task 7.2.1 was successfully completed. The computer receives a ``Hello World!'' via the RS-232 to USB adapter.
+\createfigure{./Figures/7.2.2-1.jpg}{Task 7.2.2 Hardware Setup and LCD Output}
+\createfigure{./Figures/7.2.2-2.jpg}{Task 7.2.2 UART Output}
+Task 7.2.2 was successfully completed, the MCU sends the characters sent from the serial port and displays then on the computer in uppercase once 16 characters are received in the buffer.\\
+Tasks 7.2.3 and 7.3.1 were not completed for this assignment due to time constraints.
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
 \bibliographystyle{IEEEtran}
