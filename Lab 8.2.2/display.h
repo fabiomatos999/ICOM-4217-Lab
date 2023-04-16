@@ -140,7 +140,6 @@ void button_decrement(char **messages, volatile unsigned int *i)
     return_home_bottom_display();
     print_string(messages[*i]);
     *i = ((*i) - 1) % 16;
-    __delay_cycles(10000);
     return_home_top_display();
     print_string(messages[*i]);
 }
