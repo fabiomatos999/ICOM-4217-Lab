@@ -6,7 +6,7 @@ main.obj: C:/ti/ccs1220/ccs/ccs_base/msp430/include/msp430f5438.h
 main.obj: C:/ti/ccs1220/ccs/ccs_base/msp430/include/in430.h
 main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h
 main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h
-main.obj: C:/Users/uwu/Documents/ICOM-4217-Lab/Lab\ 7.2.2/display.h
+main.obj: C:/Users/gram/Documents/ICOM-4217-Lab/Lab\ 7.2.2/display.h
 main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
 main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h
 main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h
@@ -25,7 +25,7 @@ C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h:
 
 C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h:
 
-C:/Users/uwu/Documents/ICOM-4217-Lab/Lab\ 7.2.2/display.h:
+C:/Users/gram/Documents/ICOM-4217-Lab/Lab\ 7.2.2/display.h:
 
 C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
 

@@ -44,12 +44,19 @@ int main(void)
     ADC12MCTL0 |= ADC12INCH_7 + ADC12SREF_7;
     ADC12IE |= BIT0;
     ADC12CTL0 |= ADC12ENC;
+
     P1DIR |= BIT2;
     P1SEL |= BIT2;
-    ADC12CTL0 |= ADC12ENC;
+
     TA0CTL |= TASSEL_1 + MC_1;
     TA0CCR0 = 32768/10;
     TA0CCTL0 |= CCIE;
+
+    P1REN |= BIT4;
+    P1IFG &= ~BIT4;
+    P1IES |= BIT4;
+    P1IE |= BIT4;
+
     __delay_cycles(37);
     __bis_SR_register(LPM4_bits + GIE);
 
@@ -91,4 +98,16 @@ float average_celsius(){
 }
 float average_fahrenheit(){
     return (average_celsius()*1.8)+32;
+}
+
+#pragma vector=PORT1_VECTOR
+__interrupt void PORT_1()
+{
+    if (scale == Celsius){
+        scale = Fahrenheit;
+    }
+    else if (scale == Fahrenheit){
+        scale = Celsius;
+    }
+    P1IFG &= ~BIT4;
 }
