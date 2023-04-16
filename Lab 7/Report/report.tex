@@ -32,6 +32,14 @@ Materials:
   \item 1 Development board
   \item 1 IDE application
   \item 1 LCD display: 2 lines, 16 characters
+  \item 1 1/4\si{\watt} Carbon fill resistor 1\si{\kilo\ohm}
+  \item 5 1/4\si{\watt} Carbon fill resistor 4.7\si{\kilo\ohm}
+  \item 3 Momentary Switch
+  \item 1 I\textsuperscript{2}C Real-Time clock calander
+  \item 1 Quartz crystal
+  \item 3\si{\volt} Lithium battery
+  \item 1 Piezoelectric buzzer
+  \item 1 USB-To-UART converter cable
 \end{itemize}
 Methods:\\
 The first task for this assignment was implemented by first finding which ports on the MSPEXP-4305438 are the TXD and RXD ports for UARTA0, which are P3.4 and P3.5. Then the ports where selected to use their peripheral functions instead of acting like GPIO. Then the UART was reset to be able to configure it. Then the UART was configured in asynchronous UART mode using the SMCLK clock source. In order to be able to achieve a baud rate of 9600 using the 1.048576\si{\mega\hertz} clock source, a prescaller of 109 and a modulation pattern of 2 was chosen in accordance with the MSP430 datasheet. Then transmitter interrupts where enabled, the UART reset flag was cleared and the MCU was sent to a low power mode along with enabling global interrupts. Then in the global scope an array of characters containing the phrase ``Hello World!''  was initialized along with an index for the current character. Then an ISR handle for the UART was written to able transmitter interrupts where when an interrupt is fired, the transmitter buffer is ready to be written to, writes the character at current character index, updates the index and then returns from an interrupt. When the string is written to the screen, a new line and carrage return is appended and then transmitter interrupts are disabled.\\
