@@ -18,8 +18,8 @@ int main(void)
 
 
 //    TA1CTL |= TASSEL_2 + MC_1;
-    TA1CCR0 = 1048576/500;
-    TA1CCTL0 = CCIE; // enable timer A0 interrupt
+//    TA1CCR0 = 1048576/500;
+//    TA1CCTL0 = CCIE; // enable timer A0 interrupt
 
 
 
@@ -30,7 +30,10 @@ int main(void)
 __interrupt void Timer_A0(void)
 {
     P10OUT = dacValues[index];
+    volatile unsigned int d = dacValues[index];
+    volatile unsigned int i = index;
     index = (++index)%12;
+    i = index;
 }
 
 #pragma vector=TIMER1_A0_VECTOR

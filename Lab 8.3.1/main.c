@@ -72,7 +72,7 @@ __interrupt void Timer_A(void){
 __interrupt void ADC12ISR(void)
 {
     voltage = ADC12MEM0;
-    tempts[index] = (voltage-775)/10.0;
+    tempts[index] = (voltage-600)/10.0;
     index = (++index)%TEMPSIZE;
     resetBuffer();
     clear_display();
@@ -85,6 +85,7 @@ __interrupt void ADC12ISR(void)
         sprintf(BUFFER,"Temp: %d F", (int)average_fahrenheit());
 
     }
+    print_string(BUFFER);
     __bic_SR_register_on_exit(LPM4_bits);   // Exit active CPU
 }
 
