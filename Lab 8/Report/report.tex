@@ -46,10 +46,42 @@ Materials:
 \end{itemize}
 Methods:\\
 The first task for this assignment it was implemented by assigning P10.0-7 as outputs and assigning the current lookup table value to the entire port. Then the DAC receives the output from port 10 and outputs the corresponding value to the given input. Then a sine was was generated using the ``math.h'' sine function, choosing a domain where the DAC would produce a 3.3\si{\V} peak to peak signal and scaling the sine function to produce a an integer value than can be sent to the DAC.\\
-For the second lab assignment the ADC12 on the MSP430 was configured to use VeREF+/VREF- and to shoot interrupts when a conversion was ready. VeREF+/VREF- was chosen to be the VCC and GND from port RF3 on the experimenter board and that voltage was also sent to the potentiometer and was measured using analog input 7 (P6.7). Then, when a conversion is done, it checks whether the voltage is almost 0 or almost VDD to determine if the potentiometer is on the far left or far right. Finally, the voltage and the warning message for the boundary checks are sent to an external LCD via the library developed in previous assignments.\\
-The third assignment was implemented extending the second by converting the voltage to a percentage of VDD and modulating a PWM top count to adjust the brightness of an LED attached to P1.2 that has a refresh rate of 1000\si{\hertz}.\\
+For the second lab assignment the ADC12 on the MSP430 was configured to use VeREF+/VREF- and to shoot interrupts when a conversion was ready. VeREF+/VREF- was chosen to be the VCC and GND from port RF3 on the experimenter board and that voltage was also sent to the potentiometer and was measured using analog input 7 (P6.7). Then, when a conversion is done, it converts the value within the ADC memory to a voltage. Finally, the voltage and the ADC value are sent to an external LCD via the library developed in previous assignments. The following table demonstrates the value of VDD captured by the ADC at various potentiometer values:
+\begin{table}[!ht]
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  Input Voltage&Decimal Value&Measured Voltage&\% Error\\
+  \hline
+  VDD*0.1&412&332\si{\milli\volt}&0.66\\
+  \hline
+  VDD*0.2&811&654\si{\milli\volt}&0.99\\
+  \hline
+  VDD*0.3&1230&991\si{\milli\volt}&0.101\\
+  \hline
+  VDD*0.4&1652&1328\si{\milli\volt}&0.681\\
+  \hline
+  VDD*0.5&2047&1649\si{\milli\volt}&0.060\\
+  \hline
+  VDD*0.6&2456&1979\si{\milli\volt}&0.050\\
+  \hline
+  VDD*0.7&2880&2320\si{\milli\volt}&0.432\\
+  \hline
+  VDD*0.8&3290&2644\si{\milli\volt}&0.151\\
+  \hline
+  VDD*0.9&3687&2970\si{\milli\volt}&0\\
+  \hline
+  VDD*1.0&4095&3300\si{\milli\volt}&0\\
+  \hline
+\end{tabular}
+\end{table}
+
+The third assignment was implemented extending the second by converting the voltage to a percentage of VDD and modulating a PWM top count to adjust the brightness of an LED attached to P1.2 that has a refresh rate of 1000\si{\hertz}. Then, it checks whether the voltage is almost 0 or almost VDD to determine if the potentiometer is on the far left or far right indicating the maximum and minimum brightness level for the LED. Finally, the voltage and the warning message for the boundary checks are sent to an external LCD via the library developed in previous assignments.\\
 Finally, for the complementary task a TMP36 temperature sensor, was used to implement a 0\si{\celsius}-45\si{\celsius} thermometer. To do this the LM358 op amp was used in a non inverting configuration. Since voltage at 45\si{\celsius} for the TMP36 is 950\si{\milli\V}, the needed amplification for a reference voltage of 3.3\si{\V} is 3.47 which can be achieved by a setting $R_{f}$ to 2300\si{\ohm} and $R_{i}$ to 1\si{\kilo\ohm}.  The amplified signal is sent to analog input 7.
 \section{Results}
+\createfigure{./Figures/8.2.2.jpeg}{Hardware setup and Demonstration for task 8.2.2}
+This task was successfully completed, the LCD displays the current value within the ADC memory along with the current ADC value.
+\createfigure{./Figures/8.3.1.jpeg}{Hardware setup and demonstration for task 8.3.1}
+The task was successfully completed. The LCD displays the current temperature and the leftmost pushbutton toggles between celsius and Fahrenheit temperature scales.
 \nocite{rojasEmbeddedSystemsDesign2016}
 \nocite{LCDControllerDatasheets}
 \bibliographystyle{IEEEtran}
