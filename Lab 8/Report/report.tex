@@ -1,0 +1,57 @@
+\documentclass[journal]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{unicode}
+\usepackage[table]{xcolor}
+\newcommand\createfigure[2]{
+  \begin{figure}[H]
+    \centering \includegraphics[width=0.4\textwidth]{#1}
+    \caption{#2}
+  \end{figure}}
+\begin{document}
+\title{Experiment 8 Tasks\\ Lab Report} \author{Fabio J. Matos
+  Nieves (802-18-6134), Enrique Chompre Gonzalez (802-18-6106)}
+\maketitle
+\begin{abstract}
+  The purpose of this document is to detail an implementation of digital to analog and analog to digital conversion using an MSP430, analog temperature sensor, potentiometer and a DAC IC.
+\end{abstract}
+\begin{IEEEkeywords}
+  MCU, DAC, ADC, OP AMP, LCD, LED
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+\section{Introduction}
+\IEEEPARstart{T}{he} first task for this lab assignment is to output a lookup table of 8 bit values into a digital to analog converter (DAC), to  produce an output based on the input given to the DAC. A DAC is a device that receives an N-bit binary input and produces an output proportional to the value inputted into the DAC. Later on in the first task, an MSP430  is used to produce a sine wave via the DAC with a peak to peak voltage of 3.3\si{\V}. The second task consists of using an analog to digital converter to modulate the VDD input using a potentiometer and to show the percentage VDD on an LCD display. An ADC is a device that given a reference voltage and an analog voltage value within the range of the referance voltage, will output a digital value from 0-2\textsubscript{n}-1 that is proportional to the input voltage and reference voltage. The third task of this assignment extends what was done in the second but implements an LED dimmer using a potentiometer and PWM. The complementary task for this assignment was to implement a thermometer using the ADC of a microcontroller, an analog temperature sensor and an operational amplifier. This thermometer is able to accurately measure temperatures from 0\si{\celsius} to 45\si{\celsius} while using the full range of the ADC.
+\section{Materials and Methods}
+Materials:
+\begin{itemize}
+  \item 1 Development board
+  \item 1 IDE application
+  \item 1 LCD display: 2 lines, 16 characters
+  \item 1 Light Emitting Diode 5\si{\milli\meter} Red
+  \item 1 1/4W Carbon fill resistor 330\si{\ohm}
+  \item 1 1/4W Carbon fill resistor 330\si{\ohm}
+  \item 4 1/4W Carbon fill resistor 2.4\si{\kilo\ohm}
+  \item 1 1/4W Carbon fill resistor 4.7\si{\kilo\ohm}
+  \item 1 1/4W Carbon fill resistor 10\si{\kilo\ohm}
+  \item 1 Non-polarized ceramic capacitor 0.1\si{\nano\farad}
+  \item 1 Momentary switch
+  \item 1 Operational amplifier
+  \item 1 Analog temperature sensor
+  \item 1 Digital-to-analog converter
+\end{itemize}
+Methods:\\
+The first task for this assignment it was implemented by assigning P10.0-7 as outputs and assigning the current lookup table value to the entire port. Then the DAC receives the output from port 10 and outputs the corresponding value to the given input. Then a sine was was generated using the ``math.h'' sine function, choosing a domain where the DAC would produce a 3.3\si{\V} peak to peak signal and scaling the sine function to produce a an integer value than can be sent to the DAC.\\
+For the second lab assignment the ADC12 on the MSP430 was configured to use VeREF+/VREF- and to shoot interrupts when a conversion was ready. VeREF+/VREF- was chosen to be the VCC and GND from port RF3 on the experimenter board and that voltage was also sent to the potentiometer and was measured using analog input 7 (P6.7). Then, when a conversion is done, it checks whether the voltage is almost 0 or almost VDD to determine if the potentiometer is on the far left or far right. Finally, the voltage and the warning message for the boundary checks are sent to an external LCD via the library developed in previous assignments.\\
+The third assignment was implemented extending the second by converting the voltage to a percentage of VDD and modulating a PWM top count to adjust the brightness of an LED attached to P1.2 that has a refresh rate of 1000\si{\hertz}.\\
+Finally, for the complementary task a TMP36 temperature sensor, was used to implement a 0\si{\celsius}-45\si{\celsius} thermometer. To do this the LM358 op amp was used in a non inverting configuration. Since voltage at 45\si{\celsius} for the TMP36 is 950\si{\milli\V}, the needed amplification for a reference voltage of 3.3\si{\V} is 3.47 which can be achieved by a setting $R_{f}$ to 2300\si{\ohm} and $R_{i}$ to 1\si{\kilo\ohm}.  The amplified signal is sent to analog input 7.
+\section{Results}
+\nocite{rojasEmbeddedSystemsDesign2016}
+\nocite{LCDControllerDatasheets}
+\bibliographystyle{IEEEtran}
+\bibliography{./references.bib}
+\end{document}
