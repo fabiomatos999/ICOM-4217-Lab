@@ -42,6 +42,7 @@ int main(void)
     while (1){
         ADC12CTL0 |= ADC12SC;
         __bis_SR_register(LPM4_bits + GIE);
+        __delay_cycles(100000);
     }
 }
 
@@ -58,14 +59,15 @@ __interrupt void ADC12ISR(void)
     return_home_top_display();
     sprintf(BUFFER,"Brightness: %d%",(int)(dutycycle*100.0));
     print_string(BUFFER);
-    if (dutycycle*100.0 < 0.001){
+    __delay_cycles(10000);
+    if (dutycycle*100.0 < 1){
         resetBuffer();
         return_home_bottom_display();
         sprintf(BUFFER,"WARN: Voltage At MIN");
         print_string(BUFFER);
 
     }
-    else if (dutycycle*100.0 > 99.999){
+    else if (dutycycle*100.0 > 99){
         resetBuffer();
         return_home_bottom_display();
         sprintf(BUFFER,"WARN: Voltage At MAX");
