@@ -78,8 +78,10 @@ For the second lab assignment the ADC12 on the MSP430 was configured to use VeRE
 The third assignment was implemented extending the second by converting the voltage to a percentage of VDD and modulating a PWM top count to adjust the brightness of an LED attached to P1.2 that has a refresh rate of 1000\si{\hertz}. Then, it checks whether the voltage is almost 0 or almost VDD to determine if the potentiometer is on the far left or far right indicating the maximum and minimum brightness level for the LED. Finally, the voltage and the warning message for the boundary checks are sent to an external LCD via the library developed in previous assignments.\\
 Finally, for the complementary task a TMP36 temperature sensor, was used to implement a 0\si{\celsius}-45\si{\celsius} thermometer. To do this the LM358 op amp was used in a non inverting configuration. Since voltage at 45\si{\celsius} for the TMP36 is 950\si{\milli\V}, the needed amplification for a reference voltage of 3.3\si{\V} is 3.47 which can be achieved by a setting $R_{f}$ to 2300\si{\ohm} and $R_{i}$ to 1\si{\kilo\ohm}.  The amplified signal is sent to analog input 7.
 \section{Results}
+The task 8.2.1 was successfully completed. The DAC sends a different value every second from a lookup table.\\
 \createfigure{./Figures/8.2.2.jpeg}{Hardware setup and Demonstration for task 8.2.2}
-This task was successfully completed, the LCD displays the current value within the ADC memory along with the current ADC value.
+This task was successfully completed, the LCD displays the current value within the ADC memory along with the current ADC value.\\
+Task 8.2.3 was successfully completed. It can detect minimun and maximum duty cycle values while dimming an LED.
 \createfigure{./Figures/8.3.1.jpeg}{Hardware setup and demonstration for task 8.3.1}
 The task was successfully completed. The LCD displays the current temperature and the leftmost pushbutton toggles between celsius and Fahrenheit temperature scales.
 \nocite{rojasEmbeddedSystemsDesign2016}
