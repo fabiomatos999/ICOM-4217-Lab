@@ -110,5 +110,6 @@ __interrupt void PORT_1()
     else if (scale == Fahrenheit){
         scale = Celsius;
     }
+    __delay_cycles(10000);
     P1IFG &= ~BIT4;
 }
